@@ -2,13 +2,23 @@
 #include <math.h>
 
 int main(){
-    float peso, altura, imc;
+    float cf, lf, cb;
+    int cont = 0;
+    printf("Digite o comprimento e largura da folha, alem do comprimento do bolso: ");
+    scanf("%f %f %f", &cf, &lf, &cb);
 
-    printf("Digite a altura e o peso: \n");
-    scanf("%f %f", &peso, &altura);
+    do{
+        if(cf > lf){
+            cf = cf/2;
+        }else if(lf > cf){
+            lf = lf/2;
+        }
+        cont++;
+    } while (cf>cb && lf>cb);
 
-    imc = peso/pow(altura,2);
-    printf("O IMC eh: %.2f", imc);
+    printf("Quantidade de dobradas: %d", cont);
+    
+
 
     return 0;
 }
