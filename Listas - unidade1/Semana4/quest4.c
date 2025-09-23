@@ -54,7 +54,7 @@ int main(){
         pt = pt + pp + pb;
     }
 
-    printf("%.2f", pt);
+    printf("Pontuacao total de todos os lancamentos: %.2f", pt);
 
     return 0;
 }
