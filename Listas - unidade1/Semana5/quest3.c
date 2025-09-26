@@ -4,7 +4,7 @@
 
 
 float altura_pouso(float x, float y){
-    return sin(cos(y) + x) + cos(y + sin(x));
+    return sin(cos(y) + x) + cos(sin(x) + y);
 }
 
 int valida_pouso(float altura){
@@ -53,7 +53,6 @@ int main(){
         cont = 0;
         for(i = 5; i <= 8; i++){
             valida[i] = valida_pouso(altura[i]);
-            printf("%d\n", valida[i]);
             if(valida[i] != 0){
                 cont++;
             }
