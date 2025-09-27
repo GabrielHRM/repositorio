@@ -1,0 +1,3 @@
+O codigo terá como aida os numeros 0 até 3, seguindo os limites impostos pelo laço interno, de forma cosecutiva.
+Depois, quando o laço com a variavel j acabar, haverá uma quebra de linha.
+Esse processo se repetirá 4 vezes, como denotado pelos limites do laço externo.

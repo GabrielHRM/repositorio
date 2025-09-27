@@ -1,0 +1,3 @@
+A saida do programa é um padrão triangular de ordem decrescente começando pelo numero n indo até o numero 1.
+Começando com n, depois n-1 n-2, dpois n-1 n-2 n-3 e assim sucessivamente até 1.
+Onde o numero de seções da piramide é denotado pela variavel n.

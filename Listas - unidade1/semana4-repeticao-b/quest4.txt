@@ -1,0 +1,5 @@
+A saida do programa é um padrão quadricular de ordem crescente começando pelo numero 2 indo até o numero limitado por i+j.
+Esse somatorio i+j será executado n vezes.
+A proxima sequencia começa pelo segundo termo da sequencia anterior com o somatorio sendo executado até o laço j acabar.
+tudo isso acontece um total de n vezes, como solicitado para a variavel n. 
+Gerando assim uma matriz cujos elementos são denotados por i + j.
