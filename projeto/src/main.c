@@ -2,21 +2,23 @@
 #include <math.h>
 #include <stdlib.h>
 
-void menuprincipal(){
+void MenuPrincipal(){
     printf("Escolha qual o tipo de conversao eh desejada ou digite 0 para sair:\n");
     printf("1. Comprimento\n");
     printf("2. Massa\n");
     printf("3. Temperatura\n");
     printf("4. Volume\n");
     printf("5. Velocidade\n");
+    printf("6. Tempo\n");
+    printf("7. Area\n");
     printf("0. Sair\n");
 }
 
-void menunidade(int categU){
+void MenuDeUnidades(int categU){
     if(categU == 1){
         printf("====|CONVERSOR DE COMPRIMENTO|====\n");
         printf("1. Metro\n2. Quilometro\n3. Hectometro\n4. Decametro\n");
-        printf("5. Centimetro\n6. Milimetro\n7. Pe(ft)\n8. Polegada\n9. Milha");
+        printf("5. Centimetro\n6. Milimetro\n7. Pe(ft)\n8. Polegada\n9. Milha\n");
     }else if(categU == 2){
         printf("====|CONVERSOR DE MASSA|====\n");
         printf("1. Grama\n2. Quilograma\n3. Hectograma\n4. Decagrama\n");
@@ -32,6 +34,16 @@ void menunidade(int categU){
         printf("====|CONVERSOR DE VELOCIDADE|====\n");
         printf("1. Metro por segundo(m/s)\n2. Quilometro por hora(km/h)\n");
         printf("3. Milha por hora(mhp)\n4. Milha nautica por hora(knot)\n");
+    }else if(categU == 6){
+        printf("====|CONVERSOR DE TEMPO|====\n");
+        printf("1. Segundo\n2. Minuto\n3. Hora\n");
+        printf("4. Dia\n5. Mes\n6. Ano\n");
+    }else if(categU == 7){
+        printf("====|CONVERSOR DE AREA|====\n");
+        printf("1. Metro quadrado\n2. Quilometro quadrado\n");
+        printf("3. Centimetro quadrado\n4. Milimetro quadrado\n");
+        printf("5. Hectare\n6. Acre\n7. Pe quadrado\n");
+        printf("8. Polegada quadrada\n9. Milha quadrada\n");
     }
 }
 
@@ -46,29 +58,34 @@ int max_unidades(int categU){
         return 5;
     }else if(categU == 5){
         return 4;
+    }else if(categU == 6){
+        return 6;
+    }else if(categU == 7){
+        return 9;
     }
+    return 0;
 }
 
 double lervalor(){
     double valor;
-    printf("Digite o valor que vai ser convertido:\n");
-    scanf("%f", &valor);
+    printf("Digite o valor(numero real qualquer) que vai ser convertido:\n");
+    scanf("%lf", &valor);
 
     return valor;
 }
 
-double lerUnidadeDe(){
-    double unidadede;
+int lerUnidadeDe(){
+    int unidadede;
     printf("Converter de(escolha um numero das opcoes de conversao):\n");
-    scanf("%f", &unidadede);
+    scanf("%d", &unidadede);
 
     return unidadede;
 }
 
-double lerUnidadePara(){
-    double unidadepara;
+int lerUnidadePara(){
+    int unidadepara;
     printf("Para(escolha um numero das opcoes de conversao):\n");
-    scanf("%f", &unidadepara);
+    scanf("%d", &unidadepara);
 
     return unidadepara;
 }
@@ -76,15 +93,14 @@ double lerUnidadePara(){
 int validar_unidade(int categU, int unidadede, int unidadepara){
     int maxunidades = max_unidades(categU);
 
-    if(unidadede<1 || unidadede>maxunidades){
+    if(unidadede<1 || unidadede>maxunidades || unidadepara < 1 || unidadepara>maxunidades){
         printf("Unidade invalida. Digite uma opcao valida.\n");
         return 0;
     }
     return 1;
 }
 
-
-double converterComprimento(int valor_base, int de, int para){
+double converterComprimento(double valor_base, int de, int para){
     double fatores[9] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.3048, 0.0254, 1.609};
     char m[4] = "m";
     char km[4] = "km";
@@ -101,51 +117,50 @@ double converterComprimento(int valor_base, int de, int para){
     double resultado = metros / fatores[para-1];
 
     if(de == 1){
-        printf("Resultado: %.4f %s para ", valor_base, m);
+        printf("Resultado: %.4lf %s para ", valor_base, m);
     }else if(de == 2){
-        printf("Resultado: %.4f %s para ", valor_base, km);
+        printf("Resultado: %.4lf %s para ", valor_base, km);
     }else if(de == 3){
-        printf("Resultado: %.4f %s para ", valor_base, hm);
+        printf("Resultado: %.4lf %s para ", valor_base, hm);
     }else if(de == 4){
-        printf("Resultado: %.4f %s para ", valor_base, dam);
+        printf("Resultado: %.4lf %s para ", valor_base, dam);
     }else if(de == 5){
-        printf("Resultado: %.4f %s para ", valor_base, cm);
+        printf("Resultado: %.4lf %s para ", valor_base, cm);
     }else if(de == 6){
-        printf("Resultado: %.4f %s para ", valor_base, mm);
+        printf("Resultado: %.4lf %s para ", valor_base, mm);
     }else if(de == 7){
-        printf("Resultado: %.4f %s para ", valor_base, ft);
+        printf("Resultado: %.4lf %s para ", valor_base, ft);
     }else if(de == 8){
-        printf("Resultado: %.4f %s para ", valor_base, in);
+        printf("Resultado: %.4lf %s para ", valor_base, in);
     }else if(de == 9){
-        printf("Resultado: %.4f %s para ", valor_base, mi);
+        printf("Resultado: %.4lf %s para ", valor_base, mi);
     }
 
 
     if(para == 1){
-        printf("%4.f %s", resultado, m);
+        printf("%.4lf %s", resultado, m);
     }else if(para == 2){
-        printf("%4.f %s", resultado, km);
+        printf("%.4lf %s", resultado, km);
     }else if(para == 3){
-        printf("%4.f %s", resultado, hm);
+        printf("%.4lf %s", resultado, hm);
     }else if(para == 4){
-        printf("%4.f %s", resultado, dam);
+        printf("%.4lf %s", resultado, dam);
     }else if(para == 5){
-        printf("%4.f %s", resultado, cm);
+        printf("%.4lf %s", resultado, cm);
     }else if(para == 6){
-        printf("%4.f %s", resultado, mm);
+        printf("%.4lf %s", resultado, mm);
     }else if(para == 7){
-        printf("%4.f %s", resultado, ft);
+        printf("%.4lf %s", resultado, ft);
     }else if(para == 8){
-        printf("%4.f %s", resultado, in);
+        printf("%.4lf %s", resultado, in);
     }else if(para == 9){
-        printf("%4.f %s", resultado, mi);
+        printf("%.4lf %s", resultado, mi);
     }
-
 
     return resultado;
 }
 
-double converterMassa(int valor_base, int de, int para){
+double converterMassa(double valor_base, int de, int para){
     double fatores[8] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.453592, 0.0283495};
     char g[4] = "g";
     char kg[4] = "kg";
@@ -156,52 +171,52 @@ double converterMassa(int valor_base, int de, int para){
     char lb[4] = "lb";
     char oz[4] = "oz";
 
-    double metros = valor_base * fatores[de-1];
+    double grama = valor_base * fatores[de-1];
 
-    double resultado = metros / fatores[para-1];
+    double resultado = grama / fatores[para-1];
 
     if(de == 1){
-        printf("Resultado: %.4f %s para ", valor_base, g);
+        printf("Resultado: %.4lf %s para ", valor_base, g);
     }else if(de == 2){
-        printf("Resultado: %.4f %s para ", valor_base, kg);
+        printf("Resultado: %.4lf %s para ", valor_base, kg);
     }else if(de == 3){
-        printf("Resultado: %.4f %s para ", valor_base, hg);
+        printf("Resultado: %.4lf %s para ", valor_base, hg);
     }else if(de == 4){
-        printf("Resultado: %.4f %s para ", valor_base, dag);
+        printf("Resultado: %.4lf %s para ", valor_base, dag);
     }else if(de == 5){
-        printf("Resultado: %.4f %s para ", valor_base, cg);
+        printf("Resultado: %.4lf %s para ", valor_base, cg);
     }else if(de == 6){
-        printf("Resultado: %.4f %s para ", valor_base, mg);
+        printf("Resultado: %.4lf %s para ", valor_base, mg);
     }else if(de == 7){
-        printf("Resultado: %.4f %s para ", valor_base, lb);
+        printf("Resultado: %.4lf %s para ", valor_base, lb);
     }else if(de == 8){
-        printf("Resultado: %.4f %s para ", valor_base, oz);
+        printf("Resultado: %.4lf %s para ", valor_base, oz);
     }
 
 
     if(para == 1){
-        printf("%4.f %s", resultado, g);
+        printf("%.4lf %s", resultado, g);
     }else if(para == 2){
-        printf("%4.f %s", resultado, kg);
+        printf("%.4lf %s", resultado, kg);
     }else if(para == 3){
-        printf("%4.f %s", resultado, hg);
+        printf("%.4lf %s", resultado, hg);
     }else if(para == 4){
-        printf("%4.f %s", resultado, dag);
+        printf("%.4lf %s", resultado, dag);
     }else if(para == 5){
-        printf("%4.f %s", resultado, cg);
+        printf("%.4lf %s", resultado, cg);
     }else if(para == 6){
-        printf("%4.f %s", resultado, mg);
+        printf("%.4lf %s", resultado, mg);
     }else if(para == 7){
-        printf("%4.f %s", resultado, lb);
+        printf("%.4lf %s", resultado, lb);
     }else if(para == 8){
-        printf("%4.f %s", resultado, oz);
+        printf("%.4lf %s", resultado, oz);
     }
 
 
     return resultado;
 }
 
-double converterTeperatura(int valor_base, int de, int para){
+double converterTeperatura(double valor_base, int de, int para){
     double resultado;
     double celsius;
 
@@ -229,73 +244,239 @@ double converterTeperatura(int valor_base, int de, int para){
 
     if(para == 1){
         resultado = celsius;
-        printf("%4.f %s", resultado, c);
+        printf("%.4lf %s", resultado, c);
     }else if(para == 2){
         resultado = (celsius * (9.0/5.0)) + 32;
-        printf("%4.f %s", resultado, f);
+        printf("%.4lf %s", resultado, f);
     }else if(para == 3){
         resultado = celsius + 273.15;
-        printf("%4.f %s", resultado, k);
+        printf("%.4lf %s", resultado, k);
     }
 
 
     return resultado;
 }
 
-double converterVolume(int valor_base, int de, int para){
-    double fatores[5] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.453592, 0.0283495};
-    char g[4] = "g";
-    char kg[4] = "kg";
-    char hg[4] = "hg";
-    char dag[4] = "dag";
-    char cg[4] = "cg";
-    char mg[4] = "mg";
-    char lb[4] = "lb";
-    char oz[4] = "oz";
+double converterVolume(double valor_base, int de, int para){
+    double fatores[5] = {1.0, 0.1, 1000.0, 0.001, 3.785};
+    char l[4] = "L";
+    char dl[4] = "dL";
+    char m3[4] = "m³";
+    char ml[4] = "ml";
+    char gal[4] = "gal";
 
-    double metros = valor_base * fatores[de-1];
+    double litro = valor_base * fatores[de-1];
 
-    double resultado = metros / fatores[para-1];
+    double resultado = litro / fatores[para-1];
 
     if(de == 1){
-        printf("Resultado: %.4f %s para ", valor_base, g);
+        printf("Resultado: %.4lf %s para ", valor_base, l);
     }else if(de == 2){
-        printf("Resultado: %.4f %s para ", valor_base, kg);
+        printf("Resultado: %.4lf %s para ", valor_base, dl);
     }else if(de == 3){
-        printf("Resultado: %.4f %s para ", valor_base, hg);
+        printf("Resultado: %.4lf %s para ", valor_base, m3);
     }else if(de == 4){
-        printf("Resultado: %.4f %s para ", valor_base, dag);
+        printf("Resultado: %.4lf %s para ", valor_base, ml);
     }else if(de == 5){
-        printf("Resultado: %.4f %s para ", valor_base, cg);
-    }else if(de == 6){
-        printf("Resultado: %.4f %s para ", valor_base, mg);
-    }else if(de == 7){
-        printf("Resultado: %.4f %s para ", valor_base, lb);
-    }else if(de == 8){
-        printf("Resultado: %.4f %s para ", valor_base, oz);
+        printf("Resultado: %.4lf %s para ", valor_base, gal);
     }
 
 
     if(para == 1){
-        printf("%4.f %s", resultado, g);
+        printf("%.4lf %s", resultado, l);
     }else if(para == 2){
-        printf("%4.f %s", resultado, kg);
+        printf("%.4lf %s", resultado, dl);
     }else if(para == 3){
-        printf("%4.f %s", resultado, hg);
+        printf("%.4lf %s", resultado, m3);
     }else if(para == 4){
-        printf("%4.f %s", resultado, dag);
+        printf("%.4lf %s", resultado, ml);
     }else if(para == 5){
-        printf("%4.f %s", resultado, cg);
-    }else if(para == 6){
-        printf("%4.f %s", resultado, mg);
-    }else if(para == 7){
-        printf("%4.f %s", resultado, lb);
-    }else if(para == 8){
-        printf("%4.f %s", resultado, oz);
+        printf("%.4lf %s", resultado, gal);
     }
 
 
     return resultado;
+}
+
+double converterVelocidae(double valor_base, int de, int para){
+    double fatores[4] = {1.0, 0.2780, 0.4470, 0.5144};
+    char ms[6] = "m/s";
+    char kmh[6] = "km/h";
+    char mhp[6] = "mhp";
+    char no[6] = "knot";
+
+    double velocidade = valor_base * fatores[de-1];
+
+    double resultado = velocidade / fatores[para-1];
+
+    if(de == 1){
+        printf("Resultado: %.4lf %s para ", valor_base, ms);
+    }else if(de == 2){
+        printf("Resultado: %.4lf %s para ", valor_base, kmh);
+    }else if(de == 3){
+        printf("Resultado: %.4lf %s para ", valor_base, mhp);
+    }else if(de == 4){
+        printf("Resultado: %.4lf %s para ", valor_base, no);
+    }
+
+
+    if(para == 1){
+        printf("%.4lf %s", resultado, ms);
+    }else if(para == 2){
+        printf("%.4lf %s", resultado, kmh);
+    }else if(para == 3){
+        printf("%.4lf %s", resultado, mhp);
+    }else if(para == 4){
+        printf("%.4lf %s", resultado, no);
+    }
+
+    return resultado;
+}
+
+double converterArea(double valor_base, int de, int para){
+    double fatores[9] = {1.0, 1000000.0, 0.0001, 0.000001, 10000.0, 4046.86, 0.092903, 0.00064516, 2589988.11};
+
+    char m2[4] = "m²";
+    char km2[4] = "km²";
+    char cm2[4] = "cm²";
+    char mm2[4] = "mm²";
+    char hectare[4] = "ha";
+    char acre[4] = "ac";
+    char ft2[4] = "ft²";
+    char in2[4] = "in²";
+    char mi2[4] = "mi²";
+
+    double metros2 = valor_base * fatores[de-1];
+
+    double resultado = metros2 / fatores[para-1];
+
+    if(de == 1){
+        printf("Resultado: %.4lf %s para ", valor_base, m2);
+    }else if(de == 2){
+        printf("Resultado: %.4lf %s para ", valor_base, km2);
+    }else if(de == 3){
+        printf("Resultado: %.4lf %s para ", valor_base, cm2);
+    }else if(de == 4){
+        printf("Resultado: %.4lf %s para ", valor_base, mm2);
+    }else if(de == 5){
+        printf("Resultado: %.4lf %s para ", valor_base, hectare);
+    }else if(de == 6){
+        printf("Resultado: %.4lf %s para ", valor_base, acre);
+    }else if(de == 7){
+        printf("Resultado: %.4lf %s para ", valor_base, ft2);
+    }else if(de == 8){
+        printf("Resultado: %.4lf %s para ", valor_base, in2);
+    }else if(de == 9){
+        printf("Resultado: %.4lf %s para ", valor_base, mi2);
+    }
+
+
+    if(para == 1){
+        printf("%.4lf %s", resultado, m2);
+    }else if(para == 2){
+        printf("%.4lf %s", resultado, km2);
+    }else if(para == 3){
+        printf("%.4lf %s", resultado, cm2);
+    }else if(para == 4){
+        printf("%.4lf %s", resultado, mm2);
+    }else if(para == 5){
+        printf("%.4lf %s", resultado, hectare);
+    }else if(para == 6){
+        printf("%.4lf %s", resultado, acre);
+    }else if(para == 7){
+        printf("%.4lf %s", resultado, ft2);
+    }else if(para == 8){
+        printf("%.4lf %s", resultado, in2);
+    }else if(para == 9){
+        printf("%.4lf %s", resultado, mi2);
+    }
+
+
+    return resultado;
+}
+
+double converterTempo(double valor_base, int de, int para){
+    double fatores[7] = {1.0, 60.0, 3600.0, 86400.0, 604800.0, 2592000.0, 31536000.0};
+
+    char s[12] = "segundo(s)";
+    char m[12] = "minuto(s)";
+    char h[12] = "hora(s)";
+    char d[12] = "dia(s)";
+    char se[12] = "semana(s)";
+    char me[12] = "Mes(es)";
+    char an[12] = "Ano(s)";
+
+    double tempo = valor_base * fatores[de-1];
+
+    double resultado = tempo / fatores[para-1];
+
+    if(de == 1){
+        printf("Resultado: %.4lf %s para ", valor_base, s);
+    }else if(de == 2){
+        printf("Resultado: %.4lf %s para ", valor_base, m);
+    }else if(de == 3){
+        printf("Resultado: %.4lf %s para ", valor_base, h);
+    }else if(de == 4){
+        printf("Resultado: %.4lf %s para ", valor_base, d);
+    }else if(de == 5){
+        printf("Resultado: %.4lf %s para ", valor_base, se);
+    }else if(de == 6){
+        printf("Resultado: %.4lf %s para ", valor_base, me);
+    }else if(de == 7){
+        printf("Resultado: %.4lf %s para ", valor_base, an);
+    }
+
+
+    if(para == 1){
+        printf("%.4lf %s", resultado, s);
+    }else if(para == 2){
+        printf("%.4lf %s", resultado, m);
+    }else if(para == 3){
+        printf("%.4lf %s", resultado, h);
+    }else if(para == 4){
+        printf("%.4lf %s", resultado, d);
+    }else if(para == 5){
+        printf("%.4lf %s", resultado, se);
+    }else if(para == 6){
+        printf("%.4lf %s", resultado, me);
+    }else if(para == 7){
+        printf("%.4lf %s", resultado, an);
+    }
+
+    return resultado;
+}
+
+void RealizarConversao(int categU, double valor_base, int de, int para){
+    if(categU == 1){
+        converterComprimento(valor_base, de, para);
+    }else if(categU == 2){
+        converterMassa(valor_base, de, para);
+    }else if(categU == 3){
+        converterTeperatura(valor_base, de, para);
+    }else if(categU == 4){
+        converterVolume(valor_base, de, para);
+    }else if(categU == 5){
+        converterVelocidae(valor_base, de, para);
+    }else if(categU == 6){
+        converterTempo(valor_base, de, para);
+    }else if(categU == 7){
+        converterArea(valor_base, de, para);
+    }
+}
+
+void ProcessarDados(int categU){
+    double valor_base;
+    int de, para;
+
+    MenuDeUnidades(categU);
+
+    valor_base = lervalor();
+    de = lerUnidadeDe();
+    para = lerUnidadePara();
+
+    if(validar_unidade(categU, de, para)){
+        RealizarConversao(categU, valor_base, de, para);
+    }
 }
 
 int main(){
@@ -305,7 +486,7 @@ int main(){
     printf("====|Bem-vindo ao seu sitema de conversao|=====\n");
     printf("\n");
     do{
-        menuprincipal();
+        MenuPrincipal();
         scanf("%d", &opcao);
 
         if(opcao == 0){
@@ -313,10 +494,13 @@ int main(){
             break;
         }
 
-        if(opcao < 1 || opcao >5){
+        if(opcao < 1 || opcao >7){
             printf("Opcao invalida! Tente novamente.\n");
             continue;
         }
+
+        ProcessarDados(opcao);
+        printf("\n==========================================\n");
 
     }while(1);
 
