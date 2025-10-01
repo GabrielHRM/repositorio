@@ -25,22 +25,23 @@ void class_ponto(int pontos){
 }
 
 void resultado(int valida[], float altura[]){
-    int i, cont = 0;
+    int i, cont1 = 0, cont2 = 0;
 
-    for(i = 0; i<=4; i++){
+    for(i = 0; i<5; i++){
         valida[i] = valida_pouso(altura[i]);
         if(valida[i] != 0){
-            cont++;
+            cont1++;
         }      
     }
 
-    if(cont == 5){
-        cont = 0;
-        for(i = 5; i<=8; i++){
+    if(cont1 == 5){
+        for(i = 5; i<9; i++){
             valida[i] = valida_pouso(altura[i]);
-            cont++;
+            if(valida[i] != 0){
+                cont2++;
+            }
         }
-        class_ponto(cont);
+        class_ponto(cont2);
     }else{
         printf("Trocar de localizacao");
     }
@@ -64,7 +65,6 @@ int main(){
     altura[8] = altura_pouso(x,y-2);
 
     resultado(valida, altura);
-
 
     return 0;
 }
