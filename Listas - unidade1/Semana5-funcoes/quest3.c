@@ -47,6 +47,7 @@ void resultado(int valida[], float altura[]){
     }
 }
 
+//Utilização de vetores para facilitar a validade dos pontos de pouso
 int main(){
     float x, y, altura[9];
     int valida[9];

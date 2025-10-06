@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 void MenuPrincipal(){
+    //Função para a tela principal de conversões e a opção de sair
     printf("Escolha qual o tipo de conversao eh desejada ou digite 0 para sair:\n");
     printf("1. Comprimento\n");
     printf("2. Massa\n");
@@ -15,6 +16,7 @@ void MenuPrincipal(){
 }
 
 void MenuDeUnidades(int categU){
+    //Menu de cada unidade de medida e as opções de conversão dentro delas
     if(categU == 1){
         printf("====|CONVERSOR DE COMPRIMENTO|====\n");
         printf("1. Metro\n2. Quilometro\n3. Hectometro\n4. Decametro\n");
@@ -48,6 +50,8 @@ void MenuDeUnidades(int categU){
 }
 
 int max_unidades(int categU){
+    /*Função criada para retornar a quantidade de medidas dentro de uma 
+    categoria de unidade de medida*/
     if(categU == 1){
         return 9;
     }else if(categU == 2){
@@ -67,6 +71,7 @@ int max_unidades(int categU){
 }
 
 double lervalor(){
+    //Função que vai ler o valor digitdado pelo usuario que será convertido
     double valor;
     printf("Digite o valor(numero real qualquer) que vai ser convertido:\n");
     scanf("%lf", &valor);
@@ -74,7 +79,13 @@ double lervalor(){
     return valor;
 }
 
+/*As funções LerUnidadeDe e lerUnidadePara estão no contexto de:
+de Metro para Kilometro, Litro para Galão, ect. Ou seja, a unidade
+ao qual deseja-se começar e a unidade para o qual o valor resultante, que
+é baseado no valor de partida, será convertido.*/
+
 int lerUnidadeDe(){
+    //Função que vai ler o valor da opção de conversão de partida, com base nas categorias de conversão
     int unidadede;
     printf("Converter de(escolha um numero das opcoes de conversao):\n");
     scanf("%d", &unidadede);
@@ -83,6 +94,7 @@ int lerUnidadeDe(){
 }
 
 int lerUnidadePara(){
+    //Valor para o qual o valor será convertido, dependendo da opção de partida
     int unidadepara;
     printf("Para(escolha um numero das opcoes de conversao):\n");
     scanf("%d", &unidadepara);
@@ -91,6 +103,9 @@ int lerUnidadePara(){
 }
 
 int validar_unidade(int categU, int unidadede, int unidadepara){
+    /*Função para a validação das unidades escolhidas:
+    se elas estão dentro dos valores possiveis de serem escolhidos,
+    diferentes de zero, para conversão*/
     int maxunidades = max_unidades(categU);
 
     if(unidadede<1 || unidadede>maxunidades || unidadepara < 1 || unidadepara>maxunidades){
@@ -100,7 +115,16 @@ int validar_unidade(int categU, int unidadede, int unidadepara){
     return 1;
 }
 
+/*As proximas 7 funções seguem o mesmo padrão logico para conversão:
+como o valor inicial digitado pelo usuario não tem, inicialmente, qualquer valor de
+unidade, sendo apenas um número real(double) qualquer,
+então é necessario converte-lo em um valor base para ser,
+então, convertidos aos demais. Em comprimento o metro é o valor base, em massa grama,
+em temperatura o celsius e assim vai. Todos inicialmente convertidos seguindo o SI.*/
+
 double converterComprimento(double valor_base, int de, int para){
+    /*Utilização de vetores para caracteres e valores em double para
+    facilitar calculo das medidas e manter a função menos poluida*/
     double fatores[9] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.3048, 0.0254, 1.609};
     char m[4] = "m";
     char km[4] = "km";
@@ -112,10 +136,16 @@ double converterComprimento(double valor_base, int de, int para){
     char in[4] = "in";
     char mi[4] = "mi";
 
+    /*Valor inicial calculado como o produto do valor digitado pelo usuario
+    pelo fator de conversão apontado pela variavel de
+    (com base na função que a define)*/
     double metros = valor_base * fatores[de-1];
 
+    /*Resultado final calculado como o quociente do valor incial encontrado anteriormente
+    pelo fator de conversão apontado pela variavel para(com base na função que a define)*/
     double resultado = metros / fatores[para-1];
 
+    //Quem será convertido e sua unidade
     if(de == 1){
         printf("Resultado: %.4lf %s para ", valor_base, m);
     }else if(de == 2){
@@ -136,7 +166,7 @@ double converterComprimento(double valor_base, int de, int para){
         printf("Resultado: %.4lf %s para ", valor_base, mi);
     }
 
-
+    //O valor convertido e sua nova unidade
     if(para == 1){
         printf("%.4lf %s", resultado, m);
     }else if(para == 2){
@@ -447,6 +477,8 @@ double converterTempo(double valor_base, int de, int para){
 }
 
 void RealizarConversao(int categU, double valor_base, int de, int para){
+    /*Função implementada para realizar as conversões com base na opção
+    escolhida pelo usuario*/
     if(categU == 1){
         converterComprimento(valor_base, de, para);
     }else if(categU == 2){
@@ -465,6 +497,7 @@ void RealizarConversao(int categU, double valor_base, int de, int para){
 }
 
 void ProcessarDados(int categU){
+    /*Função implementada para processar os dados digitados pelo usuario*/
     double valor_base;
     int de, para;
 
@@ -485,6 +518,12 @@ int main(){
     printf("============|CONVERSOR DE UNIDADES|============\n");
     printf("====|Bem-vindo ao seu sitema de conversao|=====\n");
     printf("\n");
+
+    /*Abaixo será chamado continuamente o menu principal e fará o usuario escolher
+    as opções presentes nele, continuando o laço caso nenhuma 
+    das opções disponiveis for escolhida e parando imediatamente o laço caso ele escolha 0
+    e em seguida chamando funções dentro de funções para realizar as
+    conversões desejadas*/
     do{
         MenuPrincipal();
         scanf("%d", &opcao);
