@@ -530,7 +530,6 @@ int main(){
 
         if(opcao == 0){
             printf("Obrigado por usar o conversor! Ate mais!\n");
-            break;
         }
 
         if(opcao < 1 || opcao >7){
@@ -541,7 +540,7 @@ int main(){
         ProcessarDados(opcao);
         printf("\n==========================================\n");
 
-    }while(1);
+    }while(opcao != 0 && opcao>=1 && opcao<=7);
 
 
 
