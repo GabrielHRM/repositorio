@@ -124,7 +124,7 @@ em temperatura o celsius e assim vai. Todos inicialmente convertidos seguindo o 
 double converterComprimento(double valor_base, int de, int para){
     /*Utilização de vetores para caracteres e valores em double para
     facilitar calculo das medidas e manter a função menos poluida*/
-    double fatores[9] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.3048, 0.0254, 1.609};
+    double fatores[9] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.3048, 0.0254, 1609.34};
     char m[4] = "m";
     char km[4] = "km";
     char hm[4] = "hm";
@@ -190,7 +190,7 @@ double converterComprimento(double valor_base, int de, int para){
 }
 
 double converterMassa(double valor_base, int de, int para){
-    double fatores[8] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 0.453592, 0.0283495};
+    double fatores[8] = {1.0, 1000.0, 100.0, 10.0, 0.01, 0.001, 453.592, 28.3495};
     char g[4] = "g";
     char kg[4] = "kg";
     char hg[4] = "hg";
@@ -287,7 +287,7 @@ double converterTeperatura(double valor_base, int de, int para){
 }
 
 double converterVolume(double valor_base, int de, int para){
-    double fatores[5] = {1.0, 0.1, 1000.0, 0.001, 3.785};
+    double fatores[5] = {1.0, 0.1, 0.001, 1000.0, 0,264172};
     char l[4] = "L";
     char dl[4] = "dL";
     char m3[4] = "m³";
@@ -513,7 +513,6 @@ void ProcessarDados(int categU){
 
 int main(){
     int opcao;
-    double valor_base;
 
     printf("=============|CONVERSOR DE UNIDADES BRAZUCA|=============\n");
     printf("=========|Bem-vindo ao seu sitema de conversao|=========\n");
