@@ -536,7 +536,7 @@ int main(){
 
         if(opcao == 0){
             printf("Obrigado por usar o conversor! Ate mais!\n");
-            printf("\n==========================================\n");
+            printf("==========================================\n");
             break;
         }
 
