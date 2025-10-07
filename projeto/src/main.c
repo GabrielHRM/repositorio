@@ -530,11 +530,13 @@ int main(){
 
         if(opcao < 0 || opcao >7){
             printf("Opcao invalida! Tente novamente.\n");
+            printf("==========================================\n");
             continue;
         }
 
         if(opcao == 0){
             printf("Obrigado por usar o conversor! Ate mais!\n");
+            printf("\n==========================================\n");
             break;
         }
 
