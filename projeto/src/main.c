@@ -497,17 +497,17 @@ void RealizarConversao(int categU, double valor_base, int de, int para){
 
 void ProcessarDados(int categU){
     /*Função implementada para processar os dados digitados pelo usuario*/
-    double valor_base;
     int de, para;
+    double valorbase;
+    valorbase = lervalor();
 
     MenuDeUnidades(categU);
 
-    valor_base = lervalor();
     de = lerUnidadeDe();
     para = lerUnidadePara();
 
     if(validar_unidade(categU, de, para)){
-        RealizarConversao(categU, valor_base, de, para);
+        RealizarConversao(categU, valorbase, de, para);
     }
 }
 
@@ -527,19 +527,20 @@ int main(){
         MenuPrincipal();
         scanf("%d", &opcao);
 
-        if(opcao == 0){
-            printf("Obrigado por usar o conversor! Ate mais!\n");
-        }
 
-        if(opcao < 1 || opcao >7){
+        if(opcao < 0 || opcao >7){
             printf("Opcao invalida! Tente novamente.\n");
             continue;
+        }
+
+        if(opcao == 0){
+            printf("Obrigado por usar o conversor! Ate mais!\n");
         }
 
         ProcessarDados(opcao);
         printf("\n==========================================\n");
 
-    }while(opcao != 0 && opcao>=1 && opcao<=7);
+    }while(opcao!=0);
 
     return 0;
 }
