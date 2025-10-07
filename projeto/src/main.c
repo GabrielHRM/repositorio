@@ -515,8 +515,8 @@ void ProcessarDados(int categU){
 int main(){
     int opcao;
 
-    printf("============|CONVERSOR DE UNIDADES|============\n");
-    printf("====|Bem-vindo ao seu sitema de conversao|=====\n");
+    printf("=============|CONVERSOR DE UNIDADES BRAZUCA|=============\n");
+    printf("=========|Bem-vindo ao seu sitema de conversao|=========\n");
     printf("\n");
 
     /*Abaixo será chamado continuamente o menu principal e fará o usuario escolher
@@ -541,9 +541,6 @@ int main(){
         printf("\n==========================================\n");
 
     }while(opcao != 0 && opcao>=1 && opcao<=7);
-
-
-
 
     return 0;
 }

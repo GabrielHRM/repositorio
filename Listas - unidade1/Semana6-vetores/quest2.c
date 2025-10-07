@@ -34,7 +34,7 @@ void validar_colecao(int m, int n, int possui[]){
 
 int main(){
     int m, n;
-    printf("Entre com os valores da qtde de figurinhas da colecao completa e as sao possuidas: ");
+    printf("Entre com os valores da qtde de figurinhas da colecao completa e as que sao possuidas: ");
     scanf("%d %d", &m, &n);
 
     if(m <= 1000 && n<=m){
