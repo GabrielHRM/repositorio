@@ -10,7 +10,10 @@ void figurinhas_possui(int n, int possui[]){
     }
 }
 
-
+/*Utilizando um laço de repetição dentro outro com tamanhos diferentes para verificar
+se as figurinhas que o usuario possui fazem parte da coleção completa, se não fazem parte,
+a variavel encontrou recebe valor 0 e é printado a iteração da figurinha,
+caso o usuario possua, a variavel encontrou leva valor 1 e o segundo laço é parado à força*/
 void validar_colecao(int m, int n, int possui[]){
     int i, j, encontrou;
 

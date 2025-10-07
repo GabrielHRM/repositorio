@@ -5,7 +5,7 @@ gcc -o quest1 quest1.c
 ./quest1
 
 # intrução de compilacao da questao 2
-gcc -o quest2 quest2.c
+gcc -o quest2 quest2.c -lm
 ./quest2
 
 # intrução de compilacao da questao 3
@@ -13,5 +13,5 @@ gcc -o quest3 quest3.c
 ./quest3
 
 # intrução de compilacao da questao 4
-gcc -o quest4 quest4.c
+gcc -o quest4 quest4.c -lm
 ./quest4

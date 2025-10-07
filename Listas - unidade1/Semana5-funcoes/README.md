@@ -9,5 +9,5 @@ gcc -o quest2 quest2.c
 ./quest2
 
 # intrução de compilacao da questao 3
-gcc -o quest3 quest3.c
+gcc -o quest3 quest3.c -lm
 ./quest3

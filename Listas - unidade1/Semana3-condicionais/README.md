@@ -25,9 +25,9 @@ gcc -o quest6 quest6.c
 ./quest6
 
 # intrução de compilacao da questao 7
-gcc -o quest7 quest7.c
+gcc -o quest7 quest7.c -lm
 ./quest7
 
 # intrução de compilacao da questao 8
-gcc -o quest8 quest8.c
+gcc -o quest8 quest8.c -lm
 ./quest8
