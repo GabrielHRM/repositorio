@@ -513,6 +513,7 @@ void ProcessarDados(int categU){
 
 int main(){
     int opcao;
+    double valor_base;
 
     printf("=============|CONVERSOR DE UNIDADES BRAZUCA|=============\n");
     printf("=========|Bem-vindo ao seu sitema de conversao|=========\n");
@@ -535,12 +536,13 @@ int main(){
 
         if(opcao == 0){
             printf("Obrigado por usar o conversor! Ate mais!\n");
+            break;
         }
 
         ProcessarDados(opcao);
         printf("\n==========================================\n");
 
-    }while(opcao!=0);
+    }while(1);
 
     return 0;
 }
