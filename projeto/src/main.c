@@ -287,7 +287,7 @@ double converterTeperatura(double valor_base, int de, int para){
 }
 
 double converterVolume(double valor_base, int de, int para){
-    double fatores[5] = {1.0, 0.1, 0.001, 1000.0, 0,264172};
+    double fatores[5] = {1.0, 0.1, 0.001, 1000.0, 0.264172};
     char l[4] = "L";
     char dl[4] = "dL";
     char m3[4] = "m³";
