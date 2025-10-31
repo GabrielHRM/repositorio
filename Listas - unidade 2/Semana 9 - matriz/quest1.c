@@ -29,7 +29,7 @@ void fertil(int agro[][100], int m, int n){
             }
         }
     }
-    for(i = 0; i <m; i++){
+    for(i = 0; i < m; i++){
         for(j = 0; j < n; j++){
             if(agro[i][j] == 1){
                 if(irrigados[i][j] == 1){
