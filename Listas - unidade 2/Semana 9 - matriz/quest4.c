@@ -13,7 +13,7 @@ void ler_matriz(int matriz[][100], int m){
     }
 }
 
-void viagem(int matriz[][100], int m, int x, int z){
+void viagem_custo(int matriz[][100], int m, int x, int z){
     int y;
 
     int custo_direto = matriz[x][z];
@@ -31,9 +31,9 @@ void viagem(int matriz[][100], int m, int x, int z){
     }
 
     if(melhor_custo == matriz[x][z]){
-        printf("%d-%d", x, z);
+        printf("%d-%d R$%d", x, z, melhor_custo);
     }else if(melhory != -1){
-        printf("%d-%d-%d", x, y, z);
+        printf("%d-%d-%d R$%d", x, melhory, z, melhor_custo);
     }
 
     
@@ -44,8 +44,11 @@ int main(){
     int m, x, z;
 
     scanf("%d", &m);
+
     int viagem[m][m];
+    ler_matriz(viagem, m);
+    
     scanf("%d %d", &x, &z);
 
-    ler_matriz(viagem, m);
+    viagem_custo(viagem, m, x, z);
 }

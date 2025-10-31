@@ -29,18 +29,17 @@ void lerfreq(char freq[1001]){
 int vericia(char nome[11], char freq[1001]){
     int presente = 0, aulas = 0;
     int len = strlen(freq);
+
     char *pres = strtok(freq, " ");
 
-    for(int i = 0; i < len; i++){
-        if(isdigit(freq[i]) || freq[i] == '/'){
-            aulas++;
-        }
-    }
-    aulas = aulas/5;
-
     while(pres != NULL){
-        if(strcmp(pres, nome) == 0)
+        if(strlen(pres) == 5 && pres[2] == '/'){
+            if(isdigit(pres[0]) && isdigit(pres[1]) && isdigit(pres[3]) && isdigit(pres[4])){
+                aulas++;
+            }
+        }else if(strcmp(nome, pres) == 0){
             presente++;
+        }
         pres = strtok(NULL, " ");
     }
     return aulas - presente;
