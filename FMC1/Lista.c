@@ -13,7 +13,8 @@ void menu_principal(){
     printf("6. Funcao MDC\n");
     printf("7. Funcao calendario\n");
 }
-
+/*------------------Questão 1------------------*/
+/*----------Letra a-------------*/
 int piso(float n){
     int fpiso = 0;
     if(n>=0){
@@ -29,6 +30,9 @@ int piso(float n){
     }
 }
 
+/*-------------------------------*/
+
+/*----------Letra b-------------*/
 int teto(float n){
     int fteto = 0;
     if(n >= 0){
@@ -62,7 +66,9 @@ int fdiv(int n2, int n3){
 int funmod(int n2, int n3){
     return n2 - (n3 * fdiv(n2, n3));
 }
+/*-------------------------------*/
 
+/*----------Letra c-------------*/
 void primo(int n2, int n3){
     int ehprimo, n2abs = abs(n2), n3abs = abs(n3), i, j, inicio, fim;
     printf("[");
@@ -101,7 +107,10 @@ void primo(int n2, int n3){
     }
     printf("]");  
 }
+/*-------------------------------*/
+/*-----------------------------------------------*/
 
+/*------------------Questão 2------------------*/
 void MDC(int a, int b){
     int passo = 1, ainicial = a, binicial = b;
 
@@ -148,7 +157,9 @@ void MDC(int a, int b){
     printf("MDC(%d, %d) = %d\n", ainicial, binicial, a);
     printf("Valores de s e t pela identidade de bezout: %d, %d", sa, ta);
 }
+/*-----------------------------------------------*/
 
+/*------------------Questão 3------------------*/
 const char* calendario(int d, int m, int a){
     int dia, mes_ajustado, ano_seculo, seculo;
     const char* dias_da_semana[] = {"Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sabado"};
@@ -170,6 +181,8 @@ const char* calendario(int d, int m, int a){
 
     return dias_da_semana[dia];
 }
+
+/*-----------------------------------------------*/
 
 void valida(int opcao, float n, int n2, int n3, int d, int m, int a){
     int resultado;
