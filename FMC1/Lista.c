@@ -13,8 +13,8 @@ void menu_principal(){
     printf("6. Funcao MDC\n");
     printf("7. Funcao calendario\n");
 }
-/*------------------Questão 1------------------*/
-/*----------Letra a-------------*/
+/*----------------------------Questão 1----------------------------*/
+/*----------Questão 1.1 - Função piso-------------*/
 int piso(float n){
     int fpiso = 0;
     if(n>=0){
@@ -30,9 +30,8 @@ int piso(float n){
     }
 }
 
-/*-------------------------------*/
 
-/*----------Letra b-------------*/
+/*----------Questão 1.1 - Função teto-------------*/
 int teto(float n){
     int fteto = 0;
     if(n >= 0){
@@ -48,6 +47,7 @@ int teto(float n){
     }
 }
 
+/*----------Questão 1.2 - Função div-------------*/
 int fdiv(int n2, int n3){
     int quociente=0, dividendo = abs(n2), divisor = abs(n3);
     if(n3 != 0){
@@ -62,13 +62,12 @@ int fdiv(int n2, int n3){
     }
     return 0;
 }
-
+/*----------Questão 1.2 - Função Mod-------------*/
 int funmod(int n2, int n3){
     return n2 - (n3 * fdiv(n2, n3));
 }
-/*-------------------------------*/
 
-/*----------Letra c-------------*/
+/*----------Questão 1.3 - Função do Crivo de Eratóstenes-------------*/
 void primo(int n2, int n3){
     int ehprimo, n2abs = abs(n2), n3abs = abs(n3), i, j, inicio, fim;
     printf("[");
@@ -107,8 +106,7 @@ void primo(int n2, int n3){
     }
     printf("]");  
 }
-/*-------------------------------*/
-/*-----------------------------------------------*/
+/*-----------------------------------------------------------------*/
 
 /*------------------Questão 2------------------*/
 void MDC(int a, int b){
@@ -141,7 +139,6 @@ void MDC(int a, int b){
         novos = 1 e novot = -7 para que 14 = 147 - 19*7 seja valida pela identidade de bezout
         */
 
-        printf("Para o novo coeficiente: %d\n", r);
         printf("Valores atuais de s e t: %d, %d\n\n", novos, novot);
 
         sa = sb;
