@@ -125,21 +125,44 @@ void MDC(int a, int b){
 
         printf("Passo %d:\n", passo);
         printf("%d = %d x %d + (%d)\n", a, b, q, r);
-
-        int novos = sa - q*sb;
-        int novot = ta - q*tb;
+        printf("%d = %d - (%d x %d)\n", r, a, b, q);
+        
         /*Ex: MDC(147, 19)
         147 = 7*19 + 14
         14 = 147 - 19*7
         14 = (1*147 + 0*19) - 7*(0*147 + 1*19)
         
-        novos = 1 - 7*0
-        novot = 0 - 7*1
+        novos = 1 - 7*0 = 1
+        novot = 0 - 7*1 = -7
 
         novos = 1 e novot = -7 para que 14 = 147 - 19*7 seja valida pela identidade de bezout
+
+        Proximo:
+        19 = 14*1 + 5
+        5 = 19 - 14*1
+        5 = 19 - (147 - 7*19)
+        5 = -147 + 8*19
+
+        q atual = 1
+        sa = sb ; ta = tb ; sb = novos ; tb = novot
+        sa = 0    ta = 1    sb = 1       tb = -7 
+        
+        novos = sa - q x sb
+        novot = ta - q x tb
+
+        novos = 0 - 1x1 = -1
+        novot = 1 - 1x(-7) = 8
+
+        novos = -1 e novot = 8 para que 5 = -147 + 8*19 seja valida pela identidade de bezout
         */
 
-        printf("Valores atuais de s e t: %d, %d\n\n", novos, novot);
+        int novos = sa - q*sb;
+        int novot = ta - q*tb;
+
+        if(r!=0){
+          printf("Valores atuais de s e t: %d, %d\n\n", novos, novot);
+        }
+        
 
         sa = sb;
         ta = tb;
@@ -151,7 +174,7 @@ void MDC(int a, int b){
         passo++;
 
     }
-    printf("MDC(%d, %d) = %d\n", ainicial, binicial, a);
+    printf("\nMDC(%d, %d) = %d\n", ainicial, binicial, a);
     printf("Valores de s e t pela identidade de bezout: %d, %d", sa, ta);
 }
 /*-----------------------------------------------*/
@@ -206,11 +229,11 @@ void valida(int opcao, float n, int n2, int n3, int d, int m, int a){
         primo(n2, n3);
     }
     else if(opcao == 6){
-        printf("Algoritmo de euclides e identidade de Bézout:\n");
+        printf("Algoritmo de euclides e identidade de Bezout:\n\n");
         MDC(n2, n3);
     }
     else if(opcao == 7){
-        printf("Dia da semana corrpondente a %d/%d/%d:\n", d, m, a);
+        printf("Dia da semana corrpondente a %d/%d/%d:\n\n", d, m, a);
         dia = calendario(d, m, a);
         printf("%s", dia);
     }
@@ -223,9 +246,9 @@ int main(){
     int opcao;
     int d, m, a;
 
-    printf("Entre com um numero real qualquer para a função piso e teto:\n");
+    printf("Entre com um numero real qualquer para as funcoes piso e teto:\n");
     scanf("%f", &n);
-    printf("Entre com 2 inteiros para as funções div, mod, primo e mdc\n");
+    printf("Entre com 2 inteiros para as funcoes div, mod, primo e mdc\n");
     scanf("%d %d", &n2, &n3);
     printf("Entre com uma data para a funcao calendario:\n");
     scanf("%d %d %d", &d, &m, &a);
@@ -234,9 +257,6 @@ int main(){
     menu_principal();
     scanf("%d", &opcao);
     valida(opcao, n, n2, n3, d, m, a);
-
-
-
 
     return 0;
 }
