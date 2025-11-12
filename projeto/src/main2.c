@@ -238,6 +238,24 @@ char *trigonometricos(char *historico, int *ihistorico, int *capacidade){
     return historico;
 }
 
+char *logaritimos(char* historico, int* ihistorico, int* capacidade){
+    printf("\n=== OPERACOES TRIGONOMETRICAS ===\n");
+    printf("1. Soma(bases diferentes).\n");
+    printf("2. Subitração(bases diferentes).\n");
+    printf("3. Logaritimo de base 10.\n");
+    printf("4. Divisao(base igual).\n");
+    printf("5. Multiplicacao(base igual).\n");
+    printf("6. Logaritimo natural(ln).\n\n");
+
+    printf("Selecione uma opcao do menu:\n");
+    int opcao;
+    scanf("%d", &opcao);
+
+    
+
+
+}
+
 char *processar_opcao(int opcao, char* historico, int* ihistorico, int* capacidade){
     switch (opcao){
         case 1:
