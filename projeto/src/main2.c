@@ -304,7 +304,7 @@ long long int fatorial(double *resultado2){
     scanf("%d", &opcao);
     if(opcao < 1 || opcao >3){
         printf("Opcao invalida. Tente novamente.");
-        return logaritimos(resultado2);
+        return fatorial(resultado2);
     }
 
     long long int x, y, resultado;
