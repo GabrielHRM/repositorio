@@ -69,39 +69,39 @@ int funmod(int n2, int n3){
 
 /*----------Questão 1.3 - Função do Crivo de Eratóstenes-------------*/
 void primo(int n2, int n3){
-    int ehprimo, n2abs = abs(n2), n3abs = abs(n3), i, j, inicio, fim;
-    printf("[");
-    
-    if(n2abs < n3abs){
-        inicio = n2abs;
-        fim = n3abs;
-    }else if(n3abs < n2abs){
-        inicio = n3abs;
-        fim = n2abs;
-    }
+    int ehprimo, i, j, inicio, fim;
 
+    printf("[");
+
+    if(n2 > n3){
+        inicio = n3;
+        fim = n2;
+    }else if(n3 > n2){
+        inicio = n2;
+        fim = n3;
+    }
 
 
     for(i = inicio; i<=fim; i++){
         ehprimo = 1;
-
-        if(i == 1){
-            ehprimo = 0;
-        }else if(i == 2){
-            ehprimo = 1;
-        }else if(funmod(i, 2)==0){
-            ehprimo = 0;
-        }else{
-            for(j = 3; j<=sqrt(i); j+=2){
-                if(funmod(i, j) == 0){
-                    ehprimo = 0;
-                    break;
+        if(i >= 0){
+            if(i == 1){
+                ehprimo = 0;
+            }else if(i == 2){
+                ehprimo = 1;
+            }else if(funmod(i, 2)==0){
+                ehprimo = 0;
+            }else{
+                for(j = 3; j<=sqrt(i); j+=2){
+                    if(funmod(i, j) == 0){
+                        ehprimo = 0;
+                        break;
+                    }
                 }
             }
-        }
-
-        if(ehprimo){
+            if(ehprimo){
             printf("%d ", i);
+            }
         }
     }
     printf("]");  
@@ -246,16 +246,21 @@ int main(){
     int opcao;
     int d, m, a;
 
-    printf("Entre com um numero real qualquer para as funcoes piso e teto:\n");
-    scanf("%f", &n);
-    printf("Entre com 2 inteiros para as funcoes div, mod, primo e mdc\n");
-    scanf("%d %d", &n2, &n3);
-    printf("Entre com uma data para a funcao calendario:\n");
-    scanf("%d %d %d", &d, &m, &a);
-
-    printf("Escolha uma opcao do menu principal:\n");
     menu_principal();
+    printf("Escolha uma opcao do menu principal:\n");
     scanf("%d", &opcao);
+
+    if(opcao == 1 || opcao == 2){
+        printf("Entre com um numero real qualquer para as funcoes piso e teto:\n");
+        scanf("%f", &n);
+    }else if(opcao == 3 || opcao == 4 || opcao == 5 || opcao == 6){
+        printf("Entre com 2 inteiros para as funcoes div, mod, primo e mdc\n");
+        scanf("%d %d", &n2, &n3);
+    }else{
+        printf("Entre com uma data para a funcao calendario:\n");
+        scanf("%d %d %d", &d, &m, &a);
+    }
+
     valida(opcao, n, n2, n3, d, m, a);
 
     return 0;
