@@ -293,7 +293,7 @@ long long int fatinicial(long long int x){
     return resultado;
 }
 
-long int fatorial(double *resultado2){
+long long int fatorial(double *resultado2){
     printf("\n=== OPERACOES FATORIAIS ===\n");
     printf("1. Permutacao.\n");
     printf("2. Arranjo.\n");
@@ -311,20 +311,31 @@ long int fatorial(double *resultado2){
 
     do{
         printf("Digite os valores a serem fatorados\n");
-        scanf("%ld %ld", &x, &y);
+        scanf("%lld %lld", &x, &y);
         if(x < 0 || y < 0){
             printf("Valores invalidos. Tente Novamente.");
         }
     }while(x < 0 || y < 0);
+
+    long long int maior, menor;
+    if(x > y){
+        maior = x;
+        menor = y;
+    }else if(x < y){
+        maior = y;
+        menor = x;
+    }
 
     switch (opcao){
         case 1:
             resultado = fatinicial(x);
             *resultado2 = fatinicial(y);
             printf("%lld! = %lld", x, resultado);
-            printf("%lld! = %lld", y, *resultado2);
+            printf("%lld! = %.0lf", y, *resultado2);
             break;
-        
+        case 2:
+            resultado = fatinicial(maior)/fatinicial(maior-menor);
+            printf("A(%lld, %lld) = %lld.\n", maior, menor, resultado);
         default:
             break;
     }
