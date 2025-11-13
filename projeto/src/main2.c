@@ -317,25 +317,23 @@ long long int fatorial(double *resultado2){
         }
     }while(x < 0 || y < 0);
 
-    long long int maior, menor;
+    long long int maior = x, menor = y;
     if(x > y){
         maior = x;
         menor = y;
-    }else if(x < y){
-        maior = y;
-        menor = x;
     }
 
     switch (opcao){
         case 1:
             resultado = fatinicial(x);
-            *resultado2 = fatinicial(y);
+            *resultado2 = (double)fatinicial(y);
             printf("%lld! = %lld", x, resultado);
             printf("%lld! = %.0lf", y, *resultado2);
             break;
         case 2:
             resultado = fatinicial(maior)/fatinicial(maior-menor);
             printf("A(%lld, %lld) = %lld.\n", maior, menor, resultado);
+            break;
         default:
             break;
     }
