@@ -26,28 +26,3 @@
     ],
     "version": "2.0.0"
 }
-
-
-{
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Compilar C (C99)",
-      "type": "shell",
-      "command": "gcc",
-      "args": [
-        "-std=c99",      // ativa o padrão C99
-        "-Wall",         // mostra avisos
-        "-Wextra",       // mostra mais avisos
-        "-O2",           // otimização leve
-        "main2.c",       // seu arquivo
-        "-o", "main2.exe"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": ["$gcc"]
-    }
-  ]
-}
