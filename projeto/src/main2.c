@@ -450,10 +450,10 @@ double *soma_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1,
         return resultado;
     }
     printf("Matrizes com dimensoes diferente. Tente novamente.\n");
-    return 0;
+    return NULL;
 }
 
-long double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
+double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
     printf("1. Soma.\n");
     printf("2. Subitracao.\n");
@@ -494,17 +494,20 @@ long double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             printf("\n");
             printf("Resultado:\n");
             resultado = soma_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
-            if(resultado != 0){
+            if(resultado != NULL){
                 imprimir_matriz_resultado(resultado, linha, coluna);
                 matriz_historico(matrizhistorico, resultado, linha, coluna);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
+                free(resultado);
             }else{
                 printf("Opcao invalida. Tente novamente.");
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
             break;
     } 
-    return *resultado;
+    free(matriz1);
+    free(matriz2);
+    return 0;
 }
 
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
