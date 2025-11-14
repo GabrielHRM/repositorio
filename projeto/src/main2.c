@@ -56,7 +56,7 @@ void menuprincipal(){
     printf("3. Funcoes Trigonometricas\n");
     printf("4. Logaritmos\n");
     printf("5. Fatorial\n");
-    printf("6. Matrizes");
+    printf("6. Matrizes\n");
     printf("7. Mostrar Historico\n");
     printf("0. Sair\n\n");
     printf("Selecione uma opcao do menu principal:\n");
@@ -407,6 +407,52 @@ void ler_matriz(double *matriz, int linha, int coluna){
     }
 }
 
+void imprimir_matriz_resultado(double *matrizresultado, int linha, int coluna){
+    int i, j;
+
+    for(i = 0; i< linha; i++){
+        printf("|");
+        for(j = 0; j < coluna; j++){
+            printf("%7.2lf ", matrizresultado[i * coluna + j]);
+        }
+        printf("|\n");
+    }
+}
+
+void matriz_historico(char *entrada, double *matrizresultado, int linha, int coluna){
+    int i, j;
+    char matrizstr[50];
+    entrada[0] = '\0';
+
+    for(i = 0; i< linha; i++){
+        strcat(entrada, "|");
+        for(j = 0; j < coluna; j++){
+            sprintf(matrizstr, "%7.2lf ", matrizresultado[i * coluna + j]);
+            strcat(entrada, matrizstr);
+        }
+        strcat(entrada, "|\n");
+    }
+    
+}
+
+double *soma_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+    int i, j;
+    double *resultado;
+
+    if(l1 == l2 && c1 == c2){
+        int linha = l1, coluna = c1;
+        resultado = alocarmatriz(linha, coluna);
+        for(i = 0; i<linha; i++){
+            for(j = 0; j < coluna; j++){
+                resultado[i * coluna + j] = matriz1[i * coluna + j] + matriz2[i * coluna + j];
+            }
+        }
+        return resultado;
+    }
+    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
+    return 0;
+}
+
 long double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
     printf("1. Soma.\n");
@@ -418,28 +464,47 @@ long double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
 
     int opcao;
     printf("Selecione uma opção do menu:\n");
-    scanf("%d", opcao);
+    scanf("%d", &opcao);
     if(opcao < 1 || opcao > 6){
         printf("Opcao invalida. Tente novamente.");
         return operacao_com_matrizes(hist, espacousado, tamanho);
     }
 
-    int linha, coluna;
-    double *matriz1, *matriz2;
+    int linha, coluna, linha2, coluna2;
+    double *matriz1, *matriz2, *resultado;
+    char matrizhistorico[200];
 
     do{
         printf("Digite a ordem das matrizes(linha x coluna):\n");
-        scanf("%d %d", &linha, &coluna);
-        if(linha < 0 || coluna < 0){
+        scanf("%d %d %d %d", &linha, &coluna, &linha2, &coluna2);
+        if(linha <= 0 || coluna <= 0 || linha2 <= 0|| coluna2 <= 0){
             printf("Ordem invalida. Tente Novamente.\n");
         }
-    }while(linha < 0 || coluna < 0);
+    }while(linha <= 0 || coluna <= 0 || linha2 <= 0|| coluna2 <= 0);
 
     matriz1 = alocarmatriz(linha, coluna);
-    matriz2 = alocarmatriz(linha, coluna);
+    matriz2 = alocarmatriz(linha2, coluna2);
     printf("Porfavor, leia as matrizes:\n");
     ler_matriz(matriz1, linha, coluna);
-    ler_matriz(matriz2, linha, coluna);
+    ler_matriz(matriz2, linha2, coluna2);
+
+
+    switch(opcao){
+        case 1:
+            printf("\n");
+            printf("Resultado:\n");
+            resultado = soma_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            if(resultado != 0){
+                imprimir_matriz_resultado(resultado, linha, coluna);
+                matriz_historico(matrizhistorico, resultado, linha, coluna);
+                hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
+            }else{
+                printf("Opcao invalida. Tente novamente.");
+                return operacao_com_matrizes(hist, espacousado, tamanho);
+            }
+            break;
+    } 
+    return *resultado;
 }
 
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
@@ -464,6 +529,9 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
             resposta = fatorial(&resposta2, hist, espacousado, tamanho);
             break;
         case 6:
+            resposta = operacao_com_matrizes(hist, espacousado, tamanho);
+            break;
+        case 7:
             mostrarhistorico(hist);
         default:
             break;
@@ -475,7 +543,6 @@ int main(){
     int espacousado = 0;
     int opcao;
     char *historico = alocarhistorico(tamanho_inicial_historico);
-    historico = alocarhistorico(tamanho_inicial_historico);
 
     printf("Selecione uma opcao do menu principal:\n");
     do{
