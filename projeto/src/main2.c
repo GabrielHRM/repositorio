@@ -13,6 +13,12 @@ char *alocarhistorico(int tamanho){
     return vetorhist;
 }
 
+double *alocarmatriz(int linha, int coluna){
+    double *matriz = (double*)malloc(linha*coluna*sizeof(double));
+
+    return matriz;
+}
+
 char *adicionarhistorico(char *hist, char *entrada, int *espacousado, int *tamanho){
     int espaconecessario = *espacousado + strlen(entrada) + 2;
 
@@ -50,7 +56,8 @@ void menuprincipal(){
     printf("3. Funcoes Trigonometricas\n");
     printf("4. Logaritmos\n");
     printf("5. Fatorial\n");
-    printf("6. Mostrar Historico\n");
+    printf("6. Matrizes");
+    printf("7. Mostrar Historico\n");
     printf("0. Sair\n\n");
     printf("Selecione uma opcao do menu principal:\n");
 }
@@ -389,6 +396,50 @@ long long int fatorial(double *resultado2, char *hist, int *espacousado, int *ta
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
     return resultado;
+}
+
+void ler_matriz(double *matriz, int linha, int coluna){
+    int i, j;
+    for(i = 0; i<linha; i++){
+        for(j = 0; j < coluna; j++){
+            scanf("%lf", &matriz[i * coluna + j]);
+        }
+    }
+}
+
+long double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
+    printf("\n=== OPERACOES MATRICIAIS ===\n");
+    printf("1. Soma.\n");
+    printf("2. Subitracao.\n");
+    printf("3. Divisao escalar.\n");
+    printf("4. Divisao matricial.\n");
+    printf("5. Multiplicacao escalar.\n");
+    printf("6. Multiplicacao matricial.\n\n");
+
+    int opcao;
+    printf("Selecione uma opção do menu:\n");
+    scanf("%d", opcao);
+    if(opcao < 1 || opcao > 6){
+        printf("Opcao invalida. Tente novamente.");
+        return operacao_com_matrizes(hist, espacousado, tamanho);
+    }
+
+    int linha, coluna;
+    double *matriz1, *matriz2;
+
+    do{
+        printf("Digite a ordem das matrizes(linha x coluna):\n");
+        scanf("%d %d", &linha, &coluna);
+        if(linha < 0 || coluna < 0){
+            printf("Ordem invalida. Tente Novamente.\n");
+        }
+    }while(linha < 0 || coluna < 0);
+
+    matriz1 = alocarmatriz(linha, coluna);
+    matriz2 = alocarmatriz(linha, coluna);
+    printf("Porfavor, leia as matrizes:\n");
+    ler_matriz(matriz1, linha, coluna);
+    ler_matriz(matriz2, linha, coluna);
 }
 
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
