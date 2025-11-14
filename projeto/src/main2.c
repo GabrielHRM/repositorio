@@ -333,7 +333,7 @@ long long int fatinicial(long long int x){
     return resultado;
 }
 
-long long int fatorial(double *resultado2){
+long long int fatorial(double *resultado2, char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES FATORIAIS ===\n");
     printf("1. Permutacao.\n");
     printf("2. Arranjo.\n");
@@ -344,7 +344,7 @@ long long int fatorial(double *resultado2){
     scanf("%d", &opcao);
     if(opcao < 1 || opcao >3){
         printf("Opcao invalida. Tente novamente.");
-        return fatorial(resultado2);
+        return fatorial(resultado2, hist, espacousado, tamanho);
     }
 
     long long int x, y, resultado;
@@ -363,24 +363,31 @@ long long int fatorial(double *resultado2){
         menor = y;
     }
 
+    char entrada[200];
+
     switch (opcao){
         case 1:
             resultado = fatinicial(x);
             *resultado2 = (double)fatinicial(y);
-            printf("%lld! = %lld", x, resultado);
-            printf("%lld! = %.0lf", y, *resultado2);
+            printf("%lld! = %lld.\n", x, resultado);
+            printf("%lld! = %.0lf.\n\n", y, *resultado2);
+            sprintf(entrada, "%lld! = %lld | %lld! = %.0lf", x, resultado, y, *resultado2);
             break;
         case 2:
             resultado = fatinicial(maior)/fatinicial(maior-menor);
             printf("A(%lld, %lld) = %lld.\n", maior, menor, resultado);
+            sprintf(entrada, "A(%lld, %lld) = %lld.", maior, menor, resultado);
             break;
         case 3:
             resultado = fatinicial(maior)/(fatinicial(menor)*fatinicial(maior-menor));
             printf("C(%lld, %lld) = %lld.\n", maior, menor, resultado);
+            sprintf(entrada, "A(%lld, %lld) = %lld.", maior, menor, resultado);
         default:
             break;
     }
     
+    hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
+
     return resultado;
 }
 
@@ -403,7 +410,7 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
             resposta = logaritimos(&resposta2, hist, espacousado, tamanho);
             break;
         case 5:
-            resposta = fatorial(&resposta2);
+            resposta = fatorial(&resposta2, hist, espacousado, tamanho);
             break;
         case 6:
             mostrarhistorico(hist);
