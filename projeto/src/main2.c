@@ -478,8 +478,12 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, int l1, int l2
     resultado = alocarmatriz(l1, c2);
 
     if(c1 == l2){
+        /*
+          resultado[i][j] += m1[i][k] * m2[k][j]
+          resultado[i*c2+j] += m1[i*c1 + k] * m2[k*c2 + j]
+        */
+
         for(i = 0; i<l1; i++){
-            //i * coluna + j
             for(j = 0; j<c2; j++){
                 for(k = 0; k<c1; k++){
                     resultado[i * c2 + j] += matriz1[i * c1 + k] * matriz2[k * c2 + j];
@@ -490,12 +494,13 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, int l1, int l2
     return resultado;
 }
 
+
 double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
     printf("1. Soma matrcial.\n");
     printf("2. Subitracao matricial.\n");
     printf("3. Multiplicacao matricial.\n");
-    printf("4. Divisao matricial.\n\n");
+    printf("4. Multiplicação escalar\n\n");
 
     int opcao;
     printf("Selecione uma opção do menu:\n");
