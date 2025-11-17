@@ -453,19 +453,54 @@ double *soma_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1,
     return NULL;
 }
 
+double *subtracao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+    int i, j;
+    double *resultado;
+
+    if(l1 == l2 && c1 == c2){
+        int linha = l1, coluna = c1;
+        resultado = alocarmatriz(linha, coluna);
+        for(i = 0; i<linha; i++){
+            for(j = 0; j < coluna; j++){
+                resultado[i * coluna + j] = matriz1[i * coluna + j] - matriz2[i * coluna + j];
+            }
+        }
+        return resultado;
+    }
+    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
+    return NULL;
+}
+
+
+double *multiplicacao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+    int i, j, k;
+    double *resultado;
+    resultado = alocarmatriz(l1, c2);
+
+    if(c1 == l2){
+        for(i = 0; i<l1; i++){
+            //i * coluna + j
+            for(j = 0; j<c2; j++){
+                for(k = 0; k<c1; k++){
+                    resultado[i * c2 + j] += matriz1[i * c1 + k] * matriz2[k * c2 + j];
+                }
+            }
+        }
+    }
+    return resultado;
+}
+
 double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
-    printf("1. Soma.\n");
-    printf("2. Subitracao.\n");
-    printf("3. Divisao escalar.\n");
-    printf("4. Divisao matricial.\n");
-    printf("5. Multiplicacao escalar.\n");
-    printf("6. Multiplicacao matricial.\n\n");
+    printf("1. Soma matrcial.\n");
+    printf("2. Subitracao matricial.\n");
+    printf("3. Multiplicacao matricial.\n");
+    printf("4. Divisao matricial.\n\n");
 
     int opcao;
     printf("Selecione uma opção do menu:\n");
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao > 6){
+    if(opcao < 1 || opcao > 4){
         printf("Opcao invalida. Tente novamente.");
         return operacao_com_matrizes(hist, espacousado, tamanho);
     }
@@ -504,6 +539,35 @@ double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
             break;
+        case 2:
+            printf("Resultado:\n");
+            resultado = subtracao_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            if(resultado != NULL){
+                imprimir_matriz_resultado(resultado, linha, coluna);
+                matriz_historico(matrizhistorico, resultado, linha, coluna);
+                hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
+                free(resultado);
+            }else{
+                printf("Opcao invalida. Tente novamente.");
+                return operacao_com_matrizes(hist, espacousado, tamanho);
+            }
+            break;
+        case 3:
+            printf("Resultado:\n");
+            resultado = multiplicacao_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            if(resultado != NULL){
+                imprimir_matriz_resultado(resultado, linha, coluna2);
+                matriz_historico(matrizhistorico, resultado, linha, coluna2);
+                hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
+                free(resultado);
+            }else{
+                printf("Opcao invalida. Tente novamente.");
+                return operacao_com_matrizes(hist, espacousado, tamanho);
+            }
+            break;
+        default:
+            break;
+            
     } 
     free(matriz1);
     free(matriz2);
