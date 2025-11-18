@@ -29,7 +29,7 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
 
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao >4){
+    if(opcao < 1 || opcao > 4){
         printf("Opcao invalida. Tente novamente.");
         return operacoesbasicas(hist, resultado, espacousado, tamanho);
     }
@@ -89,6 +89,10 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
+    if(opcao < 1 || opcao > 4){
+        printf("Opcao invalida. Tente novamente.");
+        return operacoesbasicas(hist, resultado, espacousado, tamanho);
+    }
 
     int x, y;
     char entrada[200];
@@ -142,6 +146,10 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
+    if(opcao < 1 || opcao > 6){
+        printf("Opcao invalida. Tente novamente.");
+        return operacoesbasicas(hist, resultado, espacousado, tamanho);
+    }
 
     double graus, radianos;
     long double pi = 3.14159265358979323846;
