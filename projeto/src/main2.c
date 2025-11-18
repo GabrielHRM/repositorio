@@ -72,6 +72,10 @@ double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
 
     int opcao;
     scanf("%d", &opcao);
+    if(opcao < 1 || opcao >4){
+        printf("Opcao invalida. Tente novamente.");
+        return operacoesbasicas(hist, espacousado, tamanho);
+    }
 
     double n1, n2, resultado;
     printf("Digite 2 numeros para a operacao desejada:\n");
