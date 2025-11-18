@@ -453,7 +453,7 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
 }
 
 int main(){
-    int tamanho_inicial_historico = 1000;
+    int tamanho_inicial_historico = 100;
     int espacousado = 0;
     int opcao;
     char *historico = alocarhistorico(tamanho_inicial_historico);
