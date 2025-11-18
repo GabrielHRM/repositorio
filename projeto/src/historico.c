@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include "historico.h"
 
 char *alocarhistorico(int tamanho){
 

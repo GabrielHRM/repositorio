@@ -1,10 +1,8 @@
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef HISTORICO_H
+#define HISTORICO_H
 
-char *alocarhistorico(int tamanho);
+char* alocarhistorico(int tamanho);
+char* adicionarhistorico(char* hist, char* entrada, int* espacousado, int* tamanho);
+void mostrarhistorico(const char* hist);
 
-char *adicionarhistorico(char *hist, char *entrada, int *espacousado, int *tamanho);
-
-void mostrarhistorico(char *hist);
+#endif
