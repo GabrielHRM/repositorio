@@ -72,7 +72,7 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
         default:
             break;
     }
-    sprintf(entrada, "%lf %c %lf = %lf", n1, operacao, n2, *resultado);
+    sprintf(entrada, "%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
     return hist;
@@ -99,28 +99,28 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
             scanf("%d %d", &x, &y);
             *resultado = pow(x, y);
             printf("%d ^ %d = %.2lf", x, y, *resultado);
-            sprintf(entrada, "%d ^ %d = %.2lf", x, y, *resultado);
+            sprintf(entrada, "%d ^ %d = %.2lf\n", x, y, *resultado);
             break;
         case 2:
             printf("Digite a base:\n");
             scanf("%d", &x);
             *resultado = sqrt(x);
             printf("sqrt(%d) = %.2lf", x, *resultado);
-            sprintf(entrada, "sqrt(%d) = %.2lf", x, *resultado);
+            sprintf(entrada, "sqrt(%d) = %.2lf\n", x, *resultado);
             break;
         case 3:
             printf("Digite a base:\n");
             scanf("%d", &x);
             *resultado = cbrt(x);
             printf("cbrt(%d) = %.2lf", x, *resultado);
-            sprintf(entrada, "cbrt(%d) = %.2lf", x, *resultado);
+            sprintf(entrada, "cbrt(%d) = %.2lf\n", x, *resultado);
             break;
         case 4:
             printf("Digite a base e a ordem da raiz:\n");
             scanf("%d %d", &x, &y);
             *resultado = pow(x, 1.0/y);
             printf("%d ^ (1/%d) = %.2lf", x, y, *resultado);
-            sprintf(entrada, "%d ^ (1/%d) = %.2lf", x, y, *resultado);
+            sprintf(entrada, "%d ^ (1/%d) = %.2lf\n", x, y, *resultado);
         default:
             break;
     }
@@ -158,42 +158,42 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
             *resultado = sin(radianos);
             strcpy(operacao, "sen");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         case 2:
             radianos = graus * (pi/180.0);
             *resultado = cos(radianos);
             strcpy(operacao, "cos");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         case 3:
             radianos = graus * (pi/180.0);
             *resultado = tan(radianos);
             strcpy(operacao, "tan");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         case 4:
             radianos = graus * (pi/180.0);
             *resultado = (1/cos(radianos));
             strcpy(operacao, "sec");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         case 5:
             radianos = graus * (pi/180.0);
             *resultado = (1/sin(radianos));
             strcpy(operacao, "coss");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         case 6:
             radianos = graus * (pi/180.0);
             *resultado = (1/tan(radianos));
             strcpy(operacao, "cotg");
             printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
             break;
         default:
             break;
@@ -241,38 +241,38 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
             *resultado = log10(x);
             *resultado2 = log10(y);
             printf("log10(%ld) = %.2lf\nlog10(%ld) = %.2lf\n\n", x, *resultado, y, *resultado2);
-            sprintf(entrada, "log10(%ld) = %.2lf | log10(%ld) = %.2lf", x, *resultado, y, *resultado2);
+            sprintf(entrada, "log10(%ld) = %.2lf | log10(%ld) = %.2lf\n", x, *resultado, y, *resultado2);
             break;
         case 2:
             *resultado = log(x*y)/log(b);
             printf("log_%ld(%ld x %ld) = %.2lf\n\n", b, x, y, *resultado);
-            sprintf(entrada, "log_%ld(%ld x %ld) = %.2lf", b, x, y, *resultado);
+            sprintf(entrada, "log_%ld(%ld x %ld) = %.2lf\n", b, x, y, *resultado);
             break;
         case 3:
             *resultado = log((double)x/y)/log(b);
             printf("log_%ld(%ld / %ld) = %.2lf\n\n", b, x, y, *resultado);
-            sprintf(entrada, "log_%ld(%ld / %ld) = %.2lf", b, x, y, *resultado);
+            sprintf(entrada, "log_%ld(%ld / %ld) = %.2lf\n", b, x, y, *resultado);
             break;
         case 4:
             *resultado = n * (log(x)/log(b));
             *resultado2 = n * (log(y)/log(b));
             printf("log_%ld(%ld^%ld) = %.2lf\n", b, x, n, *resultado);
             printf("log_%ld(%ld^%ld) = %.2lf\n\n", b, y, n, *resultado2);
-            sprintf(entrada, "log_%ld(%ld^%ld) = %.2lf | log_%ld(%ld^%ld) = %.2lf", b, x, n, *resultado, b, y, n, *resultado2);
+            sprintf(entrada, "log_%ld(%ld^%ld) = %.2lf | log_%ld(%ld^%ld) = %.2lf\n", b, x, n, *resultado, b, y, n, *resultado2);
             break;
         case 5:
             *resultado = ((double)1/n)*(log(x)/log(b));
             *resultado2 = ((double)1/n)*(log(y)/log(b));
             printf("log_%ld^%ld(%ld) = %.2lf\n", b, n, x, *resultado);
             printf("log_%ld^%ld(%ld) = %.2lf\n\n", b, n, y, *resultado2);
-            sprintf(entrada, "log_%ld^%ld(%ld) = %.2lf | log_%ld^%ld(%ld) = %.2lf", b, n, x, *resultado, b, n, y, *resultado2);
+            sprintf(entrada, "log_%ld^%ld(%ld) = %.2lf | log_%ld^%ld(%ld) = %.2lf\n", b, n, x, *resultado, b, n, y, *resultado2);
             break;
         case 6:
             *resultado = log(x);
             *resultado2 = log(y);
             printf("ln(%ld) = %.2lf", x, *resultado);
             printf("ln(%ld) = %.2lf", y, *resultado2);
-            sprintf(entrada, "ln(%ld) = %.2lf | ln(%ld) = %.2lf", x, *resultado, y, *resultado2);
+            sprintf(entrada, "ln(%ld) = %.2lf | ln(%ld) = %.2lf\n", x, *resultado, y, *resultado2);
             break;
         default:
             break;
@@ -320,17 +320,17 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
             *resultado2 = (double)fatinicial(y);
             printf("%lld! = %.0lf.\n", x, *resultado);
             printf("%lld! = %.0lf.\n\n", y, *resultado2);
-            sprintf(entrada, "%lld! = %.0lf | %lld! = %.0lf", x, *resultado, y, *resultado2);
+            sprintf(entrada, "%lld! = %.0lf | %lld! = %.0lf\n", x, *resultado, y, *resultado2);
             break;
         case 2:
             *resultado = fatinicial(maior)/fatinicial(maior-menor);
             printf("A(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
-            sprintf(entrada, "A(%lld, %lld) = %.0lf.", maior, menor, *resultado);
+            sprintf(entrada, "A(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
             break;
         case 3:
             *resultado = fatinicial(maior)/(fatinicial(menor)*fatinicial(maior-menor));
             printf("C(%lld, %lld) = %lf.\n", maior, menor, *resultado);
-            sprintf(entrada, "A(%lld, %lld) = %.0lf.", maior, menor, *resultado);
+            sprintf(entrada, "A(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
         default:
             break;
     }
