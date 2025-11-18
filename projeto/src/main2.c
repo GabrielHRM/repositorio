@@ -330,7 +330,7 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
         case 3:
             *resultado = fatinicial(maior)/(fatinicial(menor)*fatinicial(maior-menor));
             printf("C(%lld, %lld) = %lf.\n", maior, menor, *resultado);
-            sprintf(entrada, "A(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
+            sprintf(entrada, "C(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
         default:
             break;
     }
