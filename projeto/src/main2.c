@@ -72,7 +72,7 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
         default:
             break;
     }
-    sprintf(entrada, "%lf %c %lf = %lf", n1, operacao, n2, resultado);
+    sprintf(entrada, "%lf %c %lf = %lf", n1, operacao, n2, *resultado);
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
     return hist;
@@ -91,7 +91,6 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
     scanf("%d", &opcao);
 
     int x, y;
-    char *operacao;
     char entrada[200];
 
     switch (opcao){
@@ -99,33 +98,29 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
             printf("Digite a base e o expoente(x e y):\n");
             scanf("%d %d", &x, &y);
             *resultado = pow(x, y);
-            operacao = "^";
-            printf("%d %s %d = %.2f", x, operacao, y, *resultado);
-            sprintf(entrada, "%d %s %d = %.2f", x, operacao, y, *resultado);
+            printf("%d ^ %d = %.2lf", x, y, *resultado);
+            sprintf(entrada, "%d ^ %d = %.2lf", x, y, *resultado);
             break;
         case 2:
             printf("Digite a base:\n");
             scanf("%d", &x);
             *resultado = sqrt(x);
-            operacao = "sqrt";
-            printf("%s(%d) = %.2f", operacao, x, *resultado);
-            sprintf(entrada, "%s%d = %.2f", operacao, x, *resultado);
+            printf("sqrt(%d) = %.2lf", x, *resultado);
+            sprintf(entrada, "sqrt(%d) = %.2lf", x, *resultado);
             break;
         case 3:
             printf("Digite a base:\n");
             scanf("%d", &x);
             *resultado = cbrt(x);
-            operacao = "cbrt";
-            printf("%s(%d) = %.2f", operacao, x, *resultado);
-            sprintf(entrada, "%s%d = %.2f", operacao, x, *resultado);
+            printf("cbrt(%d) = %.2lf", x, *resultado);
+            sprintf(entrada, "cbrt(%d) = %.2lf", x, *resultado);
             break;
         case 4:
             printf("Digite a base e a ordem da raiz:\n");
             scanf("%d %d", &x, &y);
             *resultado = pow(x, 1.0/y);
-            operacao = "^";
-            printf("%d %s (1/%d) = %.2f", x, operacao, y, *resultado);
-            sprintf(entrada, "%d %s (1/%d) = %.2f", x, operacao, y, *resultado);
+            printf("%d ^ (1/%d) = %.2lf", x, y, *resultado);
+            sprintf(entrada, "%d ^ (1/%d) = %.2lf", x, y, *resultado);
         default:
             break;
     }
@@ -362,7 +357,7 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
 
     int linha, coluna, linha2, coluna2;
     double *matriz1, *matriz2, *resultado;
-    char matrizhistorico[200];
+    char matrizhistorico[5000];
 
     do{
         printf("Digite a ordem das matrizes(linha x coluna):\n");
@@ -434,15 +429,12 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
     switch (opcao){
         case 1:
             hist = operacoesbasicas(hist, &resposta, espacousado, tamanho);
-            printf("%.2lf", resposta);
             break;
         case 2:
             hist = potenciaseraizes(hist, &resposta, espacousado, tamanho);
-            printf("%.2lf", resposta);
             break;
         case 3:
             hist = trigonometricos(hist, &resposta, espacousado, tamanho);
-            printf("%.2lf", resposta);
             break;
         case 4:
             hist = logaritimos(&resposta2, &resposta, hist, espacousado, tamanho);
@@ -461,7 +453,7 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
 }
 
 int main(){
-    int tamanho_inicial_historico = 100;
+    int tamanho_inicial_historico = 1000;
     int espacousado = 0;
     int opcao;
     char *historico = alocarhistorico(tamanho_inicial_historico);

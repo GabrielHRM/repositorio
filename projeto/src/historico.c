@@ -6,7 +6,7 @@
 
 char *alocarhistorico(int tamanho){
 
-    char *vetorhist = (char*)malloc(tamanho*sizeof(char));
+    char *vetorhist = (char*)malloc(tamanho*100*sizeof(char));
     if(vetorhist == NULL){
         return NULL;
     }
