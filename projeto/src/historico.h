@@ -3,6 +3,6 @@
 
 char* alocarhistorico(int tamanho);
 char* adicionarhistorico(char* hist, char* entrada, int* espacousado, int* tamanho);
-void mostrarhistorico(const char* hist);
+void mostrarhistorico(char* hist);
 
 #endif

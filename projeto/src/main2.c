@@ -19,7 +19,7 @@ void menuprincipal(){
     printf("Selecione uma opcao do menu principal:\n");
 }
 
-double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
+char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES BASICAS ===\n");
     printf("1. Soma(+)\n");
     printf("2. Subitracao(-)\n");
@@ -31,10 +31,10 @@ double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
     scanf("%d", &opcao);
     if(opcao < 1 || opcao >4){
         printf("Opcao invalida. Tente novamente.");
-        return operacoesbasicas(hist, espacousado, tamanho);
+        return operacoesbasicas(hist, resultado, espacousado, tamanho);
     }
 
-    double n1, n2, resultado;
+    double n1, n2;
     printf("Digite 2 numeros para a operacao desejada:\n");
     scanf("%lf %lf", &n1, &n2);
 
@@ -44,20 +44,20 @@ double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
 
     switch (opcao){
         case 1:
-            resultado = n1+n2;
+            *resultado = n1+n2;
             operacao = '+';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, resultado);
+            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
             break;
         case 2:
-            resultado = n1-n2;
+            *resultado = n1-n2;
             operacao = '-';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, resultado);
+            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
             break;
         case 3:
             if(n2 != 0){
-                resultado = n1/n2;
+                *resultado = n1/n2;
                 operacao = '/';
-                printf("%lf %c %lf = %lf\n", n1, operacao, n2, resultado);
+                printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
             }else if(n1==0 && n2 == 0){
                 printf("Erro: Indeterminação(0/0)!!\n");
             }else if(n1 != 0 && n2 == 0){
@@ -65,9 +65,9 @@ double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
             }
             break;
         case 4:
-            resultado = n1*n2;
+            *resultado = n1*n2;
             operacao = 'x';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, resultado);
+            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
             break;
         default:
             break;
@@ -75,11 +75,11 @@ double operacoesbasicas(char *hist, int *espacousado, int *tamanho){
     sprintf(entrada, "%lf %c %lf = %lf", n1, operacao, n2, resultado);
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
-    return resultado;
+    return hist;
 }
 
 
-double potenciaseraizes(char *hist, int *espacousado, int *tamanho){
+char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES DE POTENCIAS E RAIZES ===\n");
     printf("1. Potencia(x^y)\n");
     printf("2. Raiz Quadrada(x^(1/2))\n");
@@ -91,7 +91,6 @@ double potenciaseraizes(char *hist, int *espacousado, int *tamanho){
     scanf("%d", &opcao);
 
     int x, y;
-    double resultado;
     char *operacao;
     char entrada[200];
 
@@ -99,44 +98,44 @@ double potenciaseraizes(char *hist, int *espacousado, int *tamanho){
         case 1:
             printf("Digite a base e o expoente(x e y):\n");
             scanf("%d %d", &x, &y);
-            resultado = pow(x, y);
+            *resultado = pow(x, y);
             operacao = "^";
-            printf("%d %s %d = %.2f", x, operacao, y, resultado);
-            sprintf(entrada, "%d %s %d = %.2f", x, operacao, y, resultado);
+            printf("%d %s %d = %.2f", x, operacao, y, *resultado);
+            sprintf(entrada, "%d %s %d = %.2f", x, operacao, y, *resultado);
             break;
         case 2:
             printf("Digite a base:\n");
             scanf("%d", &x);
-            resultado = sqrt(x);
+            *resultado = sqrt(x);
             operacao = "sqrt";
-            printf("%s(%d) = %.2f", operacao, x, resultado);
-            sprintf(entrada, "%s%d = %.2f", operacao, x, resultado);
+            printf("%s(%d) = %.2f", operacao, x, *resultado);
+            sprintf(entrada, "%s%d = %.2f", operacao, x, *resultado);
             break;
         case 3:
             printf("Digite a base:\n");
             scanf("%d", &x);
-            resultado = cbrt(x);
+            *resultado = cbrt(x);
             operacao = "cbrt";
-            printf("%s(%d) = %.2f", operacao, x, resultado);
-            sprintf(entrada, "%s%d = %.2f", operacao, x, resultado);
+            printf("%s(%d) = %.2f", operacao, x, *resultado);
+            sprintf(entrada, "%s%d = %.2f", operacao, x, *resultado);
             break;
         case 4:
             printf("Digite a base e a ordem da raiz:\n");
             scanf("%d %d", &x, &y);
-            resultado = pow(x, 1.0/y);
+            *resultado = pow(x, 1.0/y);
             operacao = "^";
-            printf("%d %s (1/%d) = %.2f", x, operacao, y, resultado);
-            sprintf(entrada, "%d %s (1/%d) = %.2f", x, operacao, y, resultado);
+            printf("%d %s (1/%d) = %.2f", x, operacao, y, *resultado);
+            sprintf(entrada, "%d %s (1/%d) = %.2f", x, operacao, y, *resultado);
         default:
             break;
     }
     
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
-    return resultado;
+    return hist;
 }
 
-double trigonometricos(char *hist, int *espacousado, int *tamanho){
+char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES TRIGONOMETRICAS ===\n");
     printf("1. Seno\n");
     printf("2. Cosseno\n");
@@ -149,7 +148,7 @@ double trigonometricos(char *hist, int *espacousado, int *tamanho){
     int opcao;
     scanf("%d", &opcao);
 
-    double resultado, graus, radianos;
+    double graus, radianos;
     long double pi = 3.14159265358979323846;
     char operacao[20];
     char entrada[200];
@@ -161,45 +160,45 @@ double trigonometricos(char *hist, int *espacousado, int *tamanho){
     switch (opcao){
         case 1:
             radianos = graus * (pi/180.0);
-            resultado = sin(radianos);
+            *resultado = sin(radianos);
             strcpy(operacao, "sen");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         case 2:
             radianos = graus * (pi/180.0);
-            resultado = cos(radianos);
+            *resultado = cos(radianos);
             strcpy(operacao, "cos");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         case 3:
             radianos = graus * (pi/180.0);
-            resultado = tan(radianos);
+            *resultado = tan(radianos);
             strcpy(operacao, "tan");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         case 4:
             radianos = graus * (pi/180.0);
-            resultado = (1/cos(radianos));
+            *resultado = (1/cos(radianos));
             strcpy(operacao, "sec");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         case 5:
             radianos = graus * (pi/180.0);
-            resultado = (1/sin(radianos));
+            *resultado = (1/sin(radianos));
             strcpy(operacao, "coss");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         case 6:
             radianos = graus * (pi/180.0);
-            resultado = (1/tan(radianos));
+            *resultado = (1/tan(radianos));
             strcpy(operacao, "cotg");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, resultado);
-            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, resultado);
+            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
+            sprintf(entrada, "%s(%f) = %.2f", operacao, radianos, *resultado);
             break;
         default:
             break;
@@ -207,10 +206,10 @@ double trigonometricos(char *hist, int *espacousado, int *tamanho){
     
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
-    return resultado;
+    return hist;
 }
 
-double logaritimos(double *resultado2, char *hist, int *espacousado, int *tamanho){
+char *logaritimos(double *resultado2, double *resultado, char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES LOGARITMICAS ===\n");
     printf("1. Logaritimo de base 10.\n");
     printf("2. Multiplicacao(base igual).\n");
@@ -224,11 +223,10 @@ double logaritimos(double *resultado2, char *hist, int *espacousado, int *tamanh
     scanf("%d", &opcao);
     if(opcao < 1 || opcao >6){
         printf("Opcao invalida. Tente novamente.");
-        return logaritimos(resultado2, hist, espacousado, tamanho);
+        return logaritimos(resultado2, resultado, hist, espacousado, tamanho);
     }
 
     long int b, x, y, n;
-    double resultado;
     char entrada[200];
 
     do{
@@ -245,51 +243,51 @@ double logaritimos(double *resultado2, char *hist, int *espacousado, int *tamanh
 
     switch (opcao){
         case 1:
-            resultado = log10(x);
+            *resultado = log10(x);
             *resultado2 = log10(y);
-            printf("log10(%ld) = %.2lf\nlog10(%ld) = %.2lf\n\n", x, resultado, y, *resultado2);
-            sprintf(entrada, "log10(%ld) = %.2lf | log10(%ld) = %.2lf", x, resultado, y, *resultado2);
+            printf("log10(%ld) = %.2lf\nlog10(%ld) = %.2lf\n\n", x, *resultado, y, *resultado2);
+            sprintf(entrada, "log10(%ld) = %.2lf | log10(%ld) = %.2lf", x, *resultado, y, *resultado2);
             break;
         case 2:
-            resultado = log(x*y)/log(b);
-            printf("log_%ld(%ld x %ld) = %.2lf\n\n", b, x, y, resultado);
-            sprintf(entrada, "log_%ld(%ld x %ld) = %.2lf", b, x, y, resultado);
+            *resultado = log(x*y)/log(b);
+            printf("log_%ld(%ld x %ld) = %.2lf\n\n", b, x, y, *resultado);
+            sprintf(entrada, "log_%ld(%ld x %ld) = %.2lf", b, x, y, *resultado);
             break;
         case 3:
-            resultado = log((double)x/y)/log(b);
-            printf("log_%ld(%ld / %ld) = %.2lf\n\n", b, x, y, resultado);
-            sprintf(entrada, "log_%ld(%ld / %ld) = %.2lf", b, x, y, resultado);
+            *resultado = log((double)x/y)/log(b);
+            printf("log_%ld(%ld / %ld) = %.2lf\n\n", b, x, y, *resultado);
+            sprintf(entrada, "log_%ld(%ld / %ld) = %.2lf", b, x, y, *resultado);
             break;
         case 4:
-            resultado = n * (log(x)/log(b));
+            *resultado = n * (log(x)/log(b));
             *resultado2 = n * (log(y)/log(b));
-            printf("log_%ld(%ld^%ld) = %.2lf\n", b, x, n, resultado);
+            printf("log_%ld(%ld^%ld) = %.2lf\n", b, x, n, *resultado);
             printf("log_%ld(%ld^%ld) = %.2lf\n\n", b, y, n, *resultado2);
-            sprintf(entrada, "log_%ld(%ld^%ld) = %.2lf | log_%ld(%ld^%ld) = %.2lf", b, x, n, resultado, b, y, n, *resultado2);
+            sprintf(entrada, "log_%ld(%ld^%ld) = %.2lf | log_%ld(%ld^%ld) = %.2lf", b, x, n, *resultado, b, y, n, *resultado2);
             break;
         case 5:
-            resultado = ((double)1/n)*(log(x)/log(b));
+            *resultado = ((double)1/n)*(log(x)/log(b));
             *resultado2 = ((double)1/n)*(log(y)/log(b));
-            printf("log_%ld^%ld(%ld) = %.2lf\n", b, n, x, resultado);
+            printf("log_%ld^%ld(%ld) = %.2lf\n", b, n, x, *resultado);
             printf("log_%ld^%ld(%ld) = %.2lf\n\n", b, n, y, *resultado2);
-            sprintf(entrada, "log_%ld^%ld(%ld) = %.2lf | log_%ld^%ld(%ld) = %.2lf", b, n, x, resultado, b, n, y, *resultado2);
+            sprintf(entrada, "log_%ld^%ld(%ld) = %.2lf | log_%ld^%ld(%ld) = %.2lf", b, n, x, *resultado, b, n, y, *resultado2);
             break;
         case 6:
-            resultado = log(x);
+            *resultado = log(x);
             *resultado2 = log(y);
-            printf("ln(%ld) = %.2lf", x, resultado);
+            printf("ln(%ld) = %.2lf", x, *resultado);
             printf("ln(%ld) = %.2lf", y, *resultado2);
-            sprintf(entrada, "ln(%ld) = %.2lf | ln(%ld) = %.2lf", x, resultado, y, *resultado2);
+            sprintf(entrada, "ln(%ld) = %.2lf | ln(%ld) = %.2lf", x, *resultado, y, *resultado2);
             break;
         default:
             break;
         }
 
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
-    return resultado;
+    return hist;
 }
 
-long long int fatorial(double *resultado2, char *hist, int *espacousado, int *tamanho){
+char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES FATORIAIS ===\n");
     printf("1. Permutacao.\n");
     printf("2. Arranjo.\n");
@@ -300,10 +298,10 @@ long long int fatorial(double *resultado2, char *hist, int *espacousado, int *ta
     scanf("%d", &opcao);
     if(opcao < 1 || opcao >3){
         printf("Opcao invalida. Tente novamente.");
-        return fatorial(resultado2, hist, espacousado, tamanho);
+        return fatorial(resultado2, resultado, hist, espacousado, tamanho);
     }
 
-    long long int x, y, resultado;
+    long long int x, y;
 
     do{
         printf("Digite os valores a serem fatorados\n");
@@ -323,31 +321,31 @@ long long int fatorial(double *resultado2, char *hist, int *espacousado, int *ta
 
     switch (opcao){
         case 1:
-            resultado = fatinicial(x);
+            *resultado = fatinicial(x);
             *resultado2 = (double)fatinicial(y);
-            printf("%lld! = %lld.\n", x, resultado);
+            printf("%lld! = %.0lf.\n", x, *resultado);
             printf("%lld! = %.0lf.\n\n", y, *resultado2);
-            sprintf(entrada, "%lld! = %lld | %lld! = %.0lf", x, resultado, y, *resultado2);
+            sprintf(entrada, "%lld! = %.0lf | %lld! = %.0lf", x, *resultado, y, *resultado2);
             break;
         case 2:
-            resultado = fatinicial(maior)/fatinicial(maior-menor);
-            printf("A(%lld, %lld) = %lld.\n", maior, menor, resultado);
-            sprintf(entrada, "A(%lld, %lld) = %lld.", maior, menor, resultado);
+            *resultado = fatinicial(maior)/fatinicial(maior-menor);
+            printf("A(%lld, %lld) = %.0lf.\n", maior, menor, *resultado);
+            sprintf(entrada, "A(%lld, %lld) = %.0lf.", maior, menor, *resultado);
             break;
         case 3:
-            resultado = fatinicial(maior)/(fatinicial(menor)*fatinicial(maior-menor));
-            printf("C(%lld, %lld) = %lld.\n", maior, menor, resultado);
-            sprintf(entrada, "A(%lld, %lld) = %lld.", maior, menor, resultado);
+            *resultado = fatinicial(maior)/(fatinicial(menor)*fatinicial(maior-menor));
+            printf("C(%lld, %lld) = %lf.\n", maior, menor, *resultado);
+            sprintf(entrada, "A(%lld, %lld) = %.0lf.", maior, menor, *resultado);
         default:
             break;
     }
     
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
-    return resultado;
+    return hist;
 }
 
-double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
+char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
     printf("1. Soma matrcial.\n");
     printf("2. Subitracao matricial.\n");
@@ -428,32 +426,32 @@ double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     } 
     free(matriz1);
     free(matriz2);
-    return 0;
+    return hist;
 }
 
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
     double resposta, resposta2;
     switch (opcao){
         case 1:
-            resposta = operacoesbasicas(hist, espacousado, tamanho);
+            hist = operacoesbasicas(hist, &resposta, espacousado, tamanho);
             printf("%.2lf", resposta);
             break;
         case 2:
-            resposta = potenciaseraizes(hist, espacousado, tamanho);
+            hist = potenciaseraizes(hist, &resposta, espacousado, tamanho);
             printf("%.2lf", resposta);
             break;
         case 3:
-            resposta = trigonometricos(hist, espacousado, tamanho);
+            hist = trigonometricos(hist, &resposta, espacousado, tamanho);
             printf("%.2lf", resposta);
             break;
         case 4:
-            resposta = logaritimos(&resposta2, hist, espacousado, tamanho);
+            hist = logaritimos(&resposta2, &resposta, hist, espacousado, tamanho);
             break;
         case 5:
-            resposta = fatorial(&resposta2, hist, espacousado, tamanho);
+            hist = fatorial(&resposta2, &resposta, hist, espacousado, tamanho);
             break;
         case 6:
-            resposta = operacao_com_matrizes(hist, espacousado, tamanho);
+            hist = operacao_com_matrizes(hist, espacousado, tamanho);
             break;
         case 7:
             mostrarhistorico(hist);
