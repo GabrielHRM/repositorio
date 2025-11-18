@@ -2,52 +2,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-
-char *alocarhistorico(int tamanho){
-
-    char *vetorhist = (char*)malloc(tamanho*sizeof(char));
-    if(vetorhist == NULL){
-        return NULL;
-    }
-    vetorhist[0] = '\0';
-    return vetorhist;
-}
-
-double *alocarmatriz(int linha, int coluna){
-    double *matriz = (double*)malloc(linha*coluna*sizeof(double));
-
-    return matriz;
-}
-
-char *adicionarhistorico(char *hist, char *entrada, int *espacousado, int *tamanho){
-    int espaconecessario = *espacousado + strlen(entrada) + 2;
-
-    if(espaconecessario > *tamanho){
-        int novotamanho = *tamanho + 100;
-        char *novohist = alocarhistorico(novotamanho);
-
-        if(novohist == NULL){
-            return hist;
-        }
-
-        strcpy(novohist, hist);
-        free(hist);
-        hist = novohist;
-        *tamanho = novotamanho;
-    }
-    strcat(hist,entrada);
-    strcat(hist, "\n");
-
-    *espacousado = strlen(hist);
-
-    return hist;
-
-}
-
-void mostrarhistorico(char *hist){
-    printf("===== HISTORICO =====\n");
-    printf("%s\n", hist);
-}
+#include "matriz.h"
+#include "fatorial.h"
+#include "historico.h"
 
 void menuprincipal(){
     printf("\n=== CALCULADORA CIENTIFICA ===\n");
@@ -332,18 +289,6 @@ double logaritimos(double *resultado2, char *hist, int *espacousado, int *tamanh
     return resultado;
 }
 
-long long int fatinicial(long long int x){
-    long long int i = x-1, resultado = x;
-    if(x == 0 || x == 1){
-        return 1;
-    }
-    while(i>=1){
-        resultado = resultado*i;
-        i--;
-    }
-    return resultado;
-}
-
 long long int fatorial(double *resultado2, char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES FATORIAIS ===\n");
     printf("1. Permutacao.\n");
@@ -401,103 +346,6 @@ long long int fatorial(double *resultado2, char *hist, int *espacousado, int *ta
 
     return resultado;
 }
-
-void ler_matriz(double *matriz, int linha, int coluna){
-    int i, j;
-    for(i = 0; i<linha; i++){
-        for(j = 0; j < coluna; j++){
-            scanf("%lf", &matriz[i * coluna + j]);
-        }
-    }
-}
-
-void imprimir_matriz_resultado(double *matrizresultado, int linha, int coluna){
-    int i, j;
-
-    for(i = 0; i< linha; i++){
-        printf("|");
-        for(j = 0; j < coluna; j++){
-            printf("%7.2lf ", matrizresultado[i * coluna + j]);
-        }
-        printf("|\n");
-    }
-}
-
-void matriz_historico(char *entrada, double *matrizresultado, int linha, int coluna){
-    int i, j;
-    char matrizstr[50];
-    entrada[0] = '\0';
-
-    for(i = 0; i< linha; i++){
-        strcat(entrada, "|");
-        for(j = 0; j < coluna; j++){
-            sprintf(matrizstr, "%7.2lf ", matrizresultado[i * coluna + j]);
-            strcat(entrada, matrizstr);
-        }
-        strcat(entrada, "|\n");
-    }
-    
-}
-
-double *soma_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
-    int i, j;
-    double *resultado;
-
-    if(l1 == l2 && c1 == c2){
-        int linha = l1, coluna = c1;
-        resultado = alocarmatriz(linha, coluna);
-        for(i = 0; i<linha; i++){
-            for(j = 0; j < coluna; j++){
-                resultado[i * coluna + j] = matriz1[i * coluna + j] + matriz2[i * coluna + j];
-            }
-        }
-        return resultado;
-    }
-    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
-    return NULL;
-}
-
-double *subtracao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
-    int i, j;
-    double *resultado;
-
-    if(l1 == l2 && c1 == c2){
-        int linha = l1, coluna = c1;
-        resultado = alocarmatriz(linha, coluna);
-        for(i = 0; i<linha; i++){
-            for(j = 0; j < coluna; j++){
-                resultado[i * coluna + j] = matriz1[i * coluna + j] - matriz2[i * coluna + j];
-            }
-        }
-        return resultado;
-    }
-    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
-    return NULL;
-}
-
-
-double *multiplicacao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
-    int i, j, k;
-    double *resultado;
-    resultado = alocarmatriz(l1, c2);
-
-    if(c1 == l2){
-        /*
-          resultado[i][j] += m1[i][k] * m2[k][j]
-          resultado[i*c2+j] += m1[i*c1 + k] * m2[k*c2 + j]
-        */
-
-        for(i = 0; i<l1; i++){
-            for(j = 0; j<c2; j++){
-                for(k = 0; k<c1; k++){
-                    resultado[i * c2 + j] += matriz1[i * c1 + k] * matriz2[k * c2 + j];
-                }
-            }
-        }
-    }
-    return resultado;
-}
-
 
 double operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
