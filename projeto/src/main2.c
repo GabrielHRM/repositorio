@@ -5,6 +5,7 @@
 #include "matriz.h"
 #include "fatorial.h"
 #include "historico.h"
+#include "estrutura.h"
 
 void menuprincipal(){
     printf("\n=== CALCULADORA CIENTIFICA ===\n");
@@ -363,33 +364,33 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         return operacao_com_matrizes(hist, espacousado, tamanho);
     }
 
-    int linha, coluna, linha2, coluna2;
+    dimensao tamanho1, tamanho2, tamanho3;
     double *matriz1, *matriz2, *resultado;
     char matrizhistorico[5000];
 
     do{
         printf("Digite a ordem das matrizes(linha x coluna):\n");
-        scanf("%d %d %d %d", &linha, &coluna, &linha2, &coluna2);
-        if(linha <= 0 || coluna <= 0 || linha2 <= 0|| coluna2 <= 0){
+        scanf("%d %d %d %d", &tamanho1.linha, &tamanho1.coluna, &tamanho2.linha, &tamanho2.coluna);
+        if(tamanho1.linha <= 0 || tamanho1.coluna <= 0 || tamanho2.linha <= 0|| tamanho2.coluna <= 0){
             printf("Ordem invalida. Tente Novamente.\n");
         }
-    }while(linha <= 0 || coluna <= 0 || linha2 <= 0|| coluna2 <= 0);
+    }while(tamanho1.linha <= 0 || tamanho1.coluna <= 0 || tamanho2.linha <= 0|| tamanho2.coluna <= 0);
 
-    matriz1 = alocarmatriz(linha, coluna);
-    matriz2 = alocarmatriz(linha2, coluna2);
+    matriz1 = alocarmatriz(tamanho1);
+    matriz2 = alocarmatriz(tamanho2);
     printf("Porfavor, leia as matrizes:\n");
-    ler_matriz(matriz1, linha, coluna);
-    ler_matriz(matriz2, linha2, coluna2);
+    ler_matriz(matriz1, tamanho1);
+    ler_matriz(matriz2, tamanho2);
 
 
     switch(opcao){
         case 1:
             printf("\n");
             printf("Resultado:\n");
-            resultado = soma_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            resultado = soma_matricial(matriz1, matriz2, tamanho1, tamanho2);
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, linha, coluna);
-                matriz_historico(matrizhistorico, resultado, linha, coluna);
+                imprimir_matriz_resultado(resultado, tamanho3);
+                matriz_historico(matrizhistorico, resultado, tamanho3);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{
@@ -399,10 +400,10 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             break;
         case 2:
             printf("Resultado:\n");
-            resultado = subtracao_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            resultado = subtracao_matricial(matriz1, matriz2, tamanho1, tamanho2);
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, linha, coluna);
-                matriz_historico(matrizhistorico, resultado, linha, coluna);
+                imprimir_matriz_resultado(resultado, tamanho3);
+                matriz_historico(matrizhistorico, resultado, tamanho3);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{
@@ -412,10 +413,10 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             break;
         case 3:
             printf("Resultado:\n");
-            resultado = multiplicacao_matricial(matriz1, matriz2, linha, linha2, coluna, coluna2);
+            resultado = multiplicacao_matricial(matriz1, matriz2, tamanho1, tamanho2);
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, linha, coluna2);
-                matriz_historico(matrizhistorico, resultado, linha, coluna2);
+                imprimir_matriz_resultado(resultado, tamanho3);
+                matriz_historico(matrizhistorico, resultado, tamanho3);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{

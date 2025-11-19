@@ -4,101 +4,107 @@
 #include <string.h>
 #include "matriz.h"
 #include "historico.h"
+#include "estrutura.h"
 
-void ler_matriz(double *matriz, int linha, int coluna){
+void ler_matriz(double *matriz, dimensao tamanho){
     int i, j;
-    for(i = 0; i<linha; i++){
-        for(j = 0; j < coluna; j++){
-            scanf("%lf", &matriz[i * coluna + j]);
+    for(i = 0; i<tamanho.linha; i++){
+        for(j = 0; j < tamanho.coluna; j++){
+            scanf("%lf", &matriz[i * tamanho.coluna + j]);
         }
     }
 }
 
-double *alocarmatriz(int linha, int coluna){
-    double *matriz = (double*)malloc(linha*coluna*sizeof(double));
+double *alocarmatriz(dimensao tamanho){
+    double *matriz = (double*)malloc(tamanho.linha*tamanho.coluna*sizeof(double));
 
     return matriz;
 }
 
-double *soma_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
+    double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
+
+    return matriz;
+}
+
+double *soma_matricial(double *matriz1, double *matriz2, dimensao tamanho1, dimensao tamanho2){
     int i, j;
     double *resultado;
 
-    if(l1 == l2 && c1 == c2){
-        int linha = l1, coluna = c1;
-        resultado = alocarmatriz(linha, coluna);
-        for(i = 0; i<linha; i++){
-            for(j = 0; j < coluna; j++){
-                resultado[i * coluna + j] = matriz1[i * coluna + j] + matriz2[i * coluna + j];
+    if(tamanho1.linha == tamanho2.linha && tamanho1.coluna == tamanho2.coluna){
+        resultado = alocarmatriz(tamanho1);
+        for(i = 0; i<tamanho1.linha; i++){
+            for(j = 0; j < tamanho1.coluna; j++){
+                resultado[i * tamanho1.coluna + j] = matriz1[i * tamanho1.coluna + j] + matriz2[i * tamanho1.coluna + j];
             }
         }
         return resultado;
     }
-    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
     return NULL;
 }
-double *subtracao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+
+double *subtracao_matricial(double *matriz1, double *matriz2, dimensao tamanho1, dimensao tamanho2){
     int i, j;
     double *resultado;
 
-    if(l1 == l2 && c1 == c2){
-        int linha = l1, coluna = c1;
-        resultado = alocarmatriz(linha, coluna);
-        for(i = 0; i<linha; i++){
-            for(j = 0; j < coluna; j++){
-                resultado[i * coluna + j] = matriz1[i * coluna + j] - matriz2[i * coluna + j];
+    if(tamanho1.linha == tamanho2.linha && tamanho1.coluna == tamanho2.coluna){
+        resultado = alocarmatriz(tamanho1);
+        for(i = 0; i<tamanho1.linha; i++){
+            for(j = 0; j < tamanho1.coluna; j++){
+                resultado[i * tamanho1.coluna + j] = matriz1[i * tamanho1.coluna + j] - matriz2[i * tamanho1.coluna + j];
             }
         }
         return resultado;
     }
-    printf("Matrizes com dimensoes diferente. Tente novamente.\n");
     return NULL;
 }
 
 
-double *multiplicacao_matricial(double *matriz1, double *matriz2, int l1, int l2, int c1, int c2){
+double *multiplicacao_matricial(double *matriz1, double *matriz2, dimensao tamanho1, dimensao tamanho2){
     int i, j, k;
     double *resultado;
-    resultado = alocarmatriz(l1, c2);
 
-    if(c1 == l2){
+    if(tamanho1.coluna == tamanho2.linha){
+        resultado = alocarmatrizmult(tamanho1, tamanho2);
         /*
           resultado[i][j] += m1[i][k] * m2[k][j]
           resultado[i*c2+j] += m1[i*c1 + k] * m2[k*c2 + j]
         */
 
-        for(i = 0; i<l1; i++){
-            for(j = 0; j<c2; j++){
-                for(k = 0; k<c1; k++){
-                    resultado[i * c2 + j] += matriz1[i * c1 + k] * matriz2[k * c2 + j];
+        for(i = 0; i<tamanho1.linha; i++){
+            for(j = 0; j<tamanho2.coluna; j++){
+                for(k = 0; k<tamanho1.coluna; k++){
+                    //tamanho2.coluna tamanho1.coluna tamanho2.coluna
+                    resultado[i * tamanho2.coluna + j] += matriz1[i * tamanho1.coluna + k] * matriz2[k * tamanho2.coluna + j];
                 }
             }
         }
+        return resultado;
     }
-    return resultado;
+    return NULL;
 }
 
-void imprimir_matriz_resultado(double *matrizresultado, int linha, int coluna){
+void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
     int i, j;
 
-    for(i = 0; i< linha; i++){
+    for(i = 0; i< tamanho.linha; i++){
         printf("|");
-        for(j = 0; j < coluna; j++){
-            printf("%7.2lf ", matrizresultado[i * coluna + j]);
+        for(j = 0; j < tamanho.coluna; j++){
+            printf("%7.2lf ", matrizresultado[i * tamanho.coluna + j]);
         }
         printf("|\n");
     }
 }
 
-void matriz_historico(char *entrada, double *matrizresultado, int linha, int coluna){
+void matriz_historico(char *entrada, double *matrizresultado, dimensao tamanho){
     int i, j;
     char matrizstr[50];
     entrada[0] = '\0';
 
-    for(i = 0; i< linha; i++){
+    for(i = 0; i< tamanho.linha; i++){
         strcat(entrada, "|");
-        for(j = 0; j < coluna; j++){
-            sprintf(matrizstr, "%7.2lf ", matrizresultado[i * coluna + j]);
+        for(j = 0; j < tamanho.coluna; j++){
+            sprintf(matrizstr, "%7.2lf ", matrizresultado[i * tamanho.coluna + j]);
             strcat(entrada, matrizstr);
         }
         strcat(entrada, "|\n");
