@@ -389,8 +389,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             printf("Resultado:\n");
             resultado = soma_matricial(matriz1, matriz2, tamanho1, tamanho2);
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, tamanho3);
-                matriz_historico(matrizhistorico, resultado, tamanho3);
+                imprimir_matriz_resultado(resultado, tamanho1);
+                matriz_historico(matrizhistorico, resultado, tamanho1);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{
@@ -402,8 +402,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             printf("Resultado:\n");
             resultado = subtracao_matricial(matriz1, matriz2, tamanho1, tamanho2);
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, tamanho3);
-                matriz_historico(matrizhistorico, resultado, tamanho3);
+                imprimir_matriz_resultado(resultado, tamanho1);
+                matriz_historico(matrizhistorico, resultado, tamanho1);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{
@@ -414,6 +414,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         case 3:
             printf("Resultado:\n");
             resultado = multiplicacao_matricial(matriz1, matriz2, tamanho1, tamanho2);
+            tamanho3.linha = tamanho1.linha;
+            tamanho3.coluna = tamanho2.coluna;
             if(resultado != NULL){
                 imprimir_matriz_resultado(resultado, tamanho3);
                 matriz_historico(matrizhistorico, resultado, tamanho3);
