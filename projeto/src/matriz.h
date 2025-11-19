@@ -1,6 +1,8 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+#include "estrutura.h"
+
 void ler_matriz(double *matriz, dimensao tamanho);
 
 double *alocarmatriz(dimensao tamanho);
