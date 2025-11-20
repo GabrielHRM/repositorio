@@ -12,7 +12,7 @@
 
 ## 🚀 Projeto: Conversor de Unidades Brazuca
 **Descrição**: Um conversor de unidades de medidas
-**Repositório**: [Link para repositório público]
+**Repositório**: [(https://github.com/GabrielHRM/repositorio.git)]
 **Vídeo de Demonstração**: https://youtu.be/kg22OH_BofI
 
 ### Funcionalidades Implementadas:
