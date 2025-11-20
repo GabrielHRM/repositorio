@@ -30,9 +30,9 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
 
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao > 4){
-        printf("Opcao invalida. Tente novamente.");
-        return operacoesbasicas(hist, resultado, espacousado, tamanho);
+    while(opcao < 1 || opcao > 4){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     double n1, n2;
@@ -90,9 +90,9 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao > 4){
-        printf("Opcao invalida. Tente novamente.");
-        return operacoesbasicas(hist, resultado, espacousado, tamanho);
+    while(opcao < 1 || opcao > 4){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     int x, y;
@@ -147,9 +147,9 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao > 6){
-        printf("Opcao invalida. Tente novamente.");
-        return operacoesbasicas(hist, resultado, espacousado, tamanho);
+    while(opcao < 1 || opcao > 6){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     double graus, radianos;
@@ -225,9 +225,9 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao >6){
-        printf("Opcao invalida. Tente novamente.");
-        return logaritimos(resultado2, resultado, hist, espacousado, tamanho);
+    while(opcao < 1 || opcao > 6){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     long int b, x, y, n;
@@ -300,9 +300,9 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
     printf("Selecione uma opcao do menu:\n");
     int opcao;
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao >3){
-        printf("Opcao invalida. Tente novamente.");
-        return fatorial(resultado2, resultado, hist, espacousado, tamanho);
+    while(opcao < 1 || opcao > 3){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     long long int x, y;
@@ -354,14 +354,14 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("1. Soma matrcial.\n");
     printf("2. Subitracao matricial.\n");
     printf("3. Multiplicacao matricial.\n");
-    printf("4. Multiplicação escalar\n\n");
+    printf("4. Multiplicacao escalar\n\n");
 
     int opcao;
-    printf("Selecione uma opção do menu:\n");
+    printf("Selecione uma opcao do menu:\n");
     scanf("%d", &opcao);
-    if(opcao < 1 || opcao > 4){
-        printf("Opcao invalida. Tente novamente.");
-        return operacao_com_matrizes(hist, espacousado, tamanho);
+    while(opcao < 1 || opcao > 4){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
     }
 
     dimensao tamanho1, tamanho2, tamanho3;
