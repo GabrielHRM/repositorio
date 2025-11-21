@@ -3,10 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "matriz.h"
+/*-------------------------------------*/
+/*O projeto foi modularizado, então foram criadas 3 arquivos.h e 3 arquivos.c
+com as respectivas funções que eram desnecessarias ficarem no aquivo main2.c
+devido a poluição visual e a quantidade absurda de linhas*/ 
 #include "fatorial.h"
 #include "historico.h"
 #include "estrutura.h"
+/*-------------------------------------*/
 
+//Menu principal
 void menuprincipal(){
     printf("\n=== CALCULADORA CIENTIFICA ===\n");
     printf("1. Operacoes Basicas\n");
@@ -21,6 +27,12 @@ void menuprincipal(){
     printf("Selecione uma opcao do menu principal:\n");
 }
 
+/*Apartir daqui os menus das opções do menu princial ficaram dentro das 
+respectivas funções, e o algoritimo para a função historico é o mesmo em todos.*/
+
+/*Cada função apartir daqui até a ultima função antes da função processar_opção
+será uma função ponteiro de string que retornará a string de historico*/
+
 char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES BASICAS ===\n");
     printf("1. Soma(+)\n");
@@ -29,6 +41,9 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
     printf("4. Multiplicacao(x)\n\n");
     printf("Selecione uma opcao do menu:\n");
 
+    /*O usuario digita aopção que quer e depois é verificado por um 
+    laço de repetição se a opção escolhida está dentro das opções
+    do menu da função*/
     int opcao;
     scanf("%d", &opcao);
     while(opcao < 1 || opcao > 4){
@@ -40,26 +55,36 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
     printf("Digite 2 numeros para a operacao desejada:\n");
     scanf("%lf %lf", &n1, &n2);
 
-    char operacao;
+    /*Criada uma variavel entrada que armazenará uma string contendo
+    a resposta da opção selecionada. Todos os resultados transformados
+    em strings serão então armazenadas em uma string maior, que é o historico,
+    não havendo a necesidade de alocar dinamicamente cada string. Bastando apenas
+    definir o tamanho da string historico que será atualizada com o tempo*/
     char entrada[5000];
     
 
+    /*O ponteiro resultado serve tanto para armazenar o resultado da operação
+    quando para alterar pela memoria o ponteiro resultado lá na função
+    processar_opção para potenciais alterações no projeto*/
+
+    /*O sprintf é utilizado para armazenar o resultado, incluindo sua variaveis
+    respectivas, na string declarada anteriormente(entrada)*/
     switch (opcao){
         case 1:
             *resultado = n1+n2;
-            operacao = '+';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
+            printf("%.2lf + %.2lf = %.2lf\n", n1, n2, *resultado);
+            sprintf(entrada, "%.2lf + %.2lf = %.2lf\n", n1, n2, *resultado);
             break;
         case 2:
             *resultado = n1-n2;
-            operacao = '-';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
+            printf("%lf - %lf = %lf\n", n1, n2, *resultado);
+            sprintf(entrada, "%.2lf - %.2lf = %.2lf\n", n1, n2, *resultado);
             break;
         case 3:
             if(n2 != 0){
                 *resultado = n1/n2;
-                operacao = '/';
-                printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
+                printf("%.2lf / %.2lf = %.2lf\n", n1, n2, *resultado);
+                sprintf(entrada, "%.2lf / %.2lf = %.2lf\n", n1, n2, *resultado);
             }else if(n1==0 && n2 == 0){
                 printf("Erro: Indeterminação(0/0)!!\n");
             }else if(n1 != 0 && n2 == 0){
@@ -68,13 +93,14 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
             break;
         case 4:
             *resultado = n1*n2;
-            operacao = 'x';
-            printf("%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
+            printf("%.2lf x %.2lf = %.2lf\n", n1, n2, *resultado);
+            sprintf(entrada, "%.2lf x %.2lf = %.2lf\n", n1, n2, *resultado);
             break;
         default:
             break;
     }
-    sprintf(entrada, "%lf %c %lf = %lf\n", n1, operacao, n2, *resultado);
+
+    /*Ponteiro da string historico que receberá a string entrada*/
     hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
 
     return hist;
@@ -155,7 +181,6 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
 
     double graus, radianos;
     long double pi = 3.14159265358979323846;
-    char operacao[100];
     char entrada[5000];
 
     printf("Digite o valor do angulo em graus:\n");
@@ -166,44 +191,38 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
         case 1:
             radianos = graus * (pi/180.0);
             *resultado = sin(radianos);
-            strcpy(operacao, "sen");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: sen(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "sen(%f) = %.2f\n", radianos, *resultado);
             break;
         case 2:
             radianos = graus * (pi/180.0);
             *resultado = cos(radianos);
-            strcpy(operacao, "cos");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: cos(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "cos(%f) = %.2f\n", radianos, *resultado);
             break;
         case 3:
             radianos = graus * (pi/180.0);
             *resultado = tan(radianos);
-            strcpy(operacao, "tan");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: tan(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "tan(%f) = %.2f\n", radianos, *resultado);
             break;
         case 4:
             radianos = graus * (pi/180.0);
             *resultado = (1/cos(radianos));
-            strcpy(operacao, "sec");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: sec(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "sec(%f) = %.2f\n", radianos, *resultado);
             break;
         case 5:
             radianos = graus * (pi/180.0);
             *resultado = (1/sin(radianos));
-            strcpy(operacao, "coss");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: cosec(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "cosec(%f) = %.2f\n", radianos, *resultado);
             break;
         case 6:
             radianos = graus * (pi/180.0);
             *resultado = (1/tan(radianos));
-            strcpy(operacao, "cotg");
-            printf("Resultado: %s(%f) = %.2f", operacao, radianos, *resultado);
-            sprintf(entrada, "%s(%f) = %.2f\n", operacao, radianos, *resultado);
+            printf("Resultado: cotg(%f) = %.2f", radianos, *resultado);
+            sprintf(entrada, "cotg(%f) = %.2f\n", radianos, *resultado);
             break;
         default:
             break;
@@ -234,6 +253,8 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
     long int b, x, y, n;
     char entrada[5000];
 
+    /*Esse laço de repetição vai garantir que os valores de x e y
+    não sejam numero <= 0 para as operações logaritimicas*/
     do{
         printf("Digite os valores da base e dos dos logaritimandos:\n");
         scanf("%ld %ld %ld",&b, &x, &y);
@@ -246,6 +267,8 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
     } while (x < 0 || y < 0 || b<=0 || b == 1);
     
 
+    /*O ponteiro resultado2 aqui tem a mesma função do ponteiro resultado
+    mencionado anteriormente.*/
     switch (opcao){
         case 1:
             *resultado = log10(x);
@@ -316,6 +339,8 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
         }
     }while(x < 0 || y < 0);
 
+    /*Para os calculos de combinação e arranjo é necessario destacar quem é
+    o maior e menor entre os digitados pelo usuario*/
     long long int maior = y, menor = x;
     if(x > y){
         maior = x;
@@ -365,6 +390,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         scanf("%d", &opcao);
     }
 
+    /*Type def struct para as dimensões das 3 matrizes: 
+    Matriz1, matriz2 e matriz resultado*/
     dimensao tamanho1, tamanho2, tamanho3;
     double *matriz1, *matriz2, *resultado;
     char matrizhistorico[5000];
@@ -377,6 +404,7 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         }
     }while(tamanho1.linha <= 0 || tamanho1.coluna <= 0 || tamanho2.linha <= 0|| tamanho2.coluna <= 0);
 
+    //alocação dinamica das matrizes
     matriz1 = alocarmatriz(tamanho1);
     matriz2 = alocarmatriz(tamanho2);
     printf("Porfavor, leia as matrizes:\n");
@@ -393,8 +421,11 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
                 imprimir_matriz_resultado(resultado, tamanho1);
                 matriz_historico(matrizhistorico, resultado, tamanho1);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
+                //Liberando espaço na memoria referente a matriz resultado 
                 free(resultado);
             }else{
+                /*Recursão simples para retornar ao inicio dessa função
+                para uma nova seleção de opções e valores de matrizes*/
                 printf("Opcao invalida. Tente novamente.");
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
@@ -430,12 +461,15 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         default:
             break;
             
-    } 
+    }
+    //Liberando espaço na memoria referente as matrizes 1 e 2 
     free(matriz1);
     free(matriz2);
     return hist;
 }
 
+
+/*Função para processar as opções do menu principal*/
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
     double resposta, resposta2;
     switch (opcao){
@@ -469,18 +503,34 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
 }
 
 int main(){
+    /*Tamanho inicial da alocação dinamica de memoria do historico definido por 1000,
+    que será feito um produtorio de 100 em 100, para cortar a necessidade 
+    de muitas alterações no tamanho. Também é para definir um tamanho 
+    inicial grande o suficiente para não retornar lixo de memoria 
+    caso digite uma matriz grande demais ou multiplas matrizes, já que uma matriz 
+    simples double 5x5 já tem que armazenar plmns 200 bytes, fora as outras
+    operações*/
     int tamanho_inicial_historico = 1000;
+    /*espaço inicial ocupado pelo historico. Como inicialmente ela está vazia, 
+    espacousado = 0*/
     int espacousado = 0;
     int opcao;
+    //alocação dinamica do histórico
     char *historico = alocarhistorico(tamanho_inicial_historico);
 
     printf("Selecione uma opcao do menu principal:\n");
+    /*Laço de repetição que irá perpetuar até que opção seja diferente de zero*/
     do{
         menuprincipal();
         scanf("%d", &opcao);
+        /*espaço o ponteiro do histórico e os endereços de memoria 
+        serão "arrastados" para as outras funções pois serão constantemente 
+        atualizados conforme as operações sejam feitas*/
         processar_opcao(opcao, historico, &espacousado, &tamanho_inicial_historico);
     }while(opcao != 0);
     
+    /*Liberação do espaço na memoria alocado para o historico que 
+    só será feito quadno o usuario digitar 0*/
     free(historico);
 
 

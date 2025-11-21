@@ -6,6 +6,7 @@
 #include "historico.h"
 #include "estrutura.h"
 
+//leitura das dimensões da matriz1 e matriz2
 void ler_matriz(double *matriz, dimensao tamanho){
     int i, j;
     for(i = 0; i<tamanho.linha; i++){
@@ -15,12 +16,25 @@ void ler_matriz(double *matriz, dimensao tamanho){
     }
 }
 
+/*alocação de memoria da matriz1, matriz2 e matriz resultado da soma matricial e da
+subitração matricial*/
 double *alocarmatriz(dimensao tamanho){
+    /*Como estou alocando dinamicamente a matriz, a matriz que antes ficava
+    m[0][0] fica só m[0]*/
+
+    /*Ex: matriz 2x2: m[0][0] m[0][1] -> m[0] m[1]
+                      m[1][0] m[1][1]    m[2] m[3]
+
+    Visualmente e na memoria alocada, fica parecido com um vetor comum,
+    o proprio compilador acha que é um vetor, mas ele é trabalhado
+    usando os principios de matrizes, sendo, para todos os propósitos, uma matriz.*/
     double *matriz = (double*)malloc(tamanho.linha*tamanho.coluna*sizeof(double));
 
     return matriz;
 }
 
+/*alocação de memoria da matriz resultado multiplicação matricial,
+já que envolve */
 double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
     double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
 
@@ -67,7 +81,9 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, dimensao taman
     if(tamanho1.coluna == tamanho2.linha){
         resultado = alocarmatrizmult(tamanho1, tamanho2);
         /*
+          A lógica padrão é:  
           resultado[i][j] += m1[i][k] * m2[k][j]
+          Mas, como foi alocado dinamicamente, fica: 
           resultado[i*c2+j] += m1[i*c1 + k] * m2[k*c2 + j]
         */
 
@@ -84,6 +100,7 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, dimensao taman
     return NULL;
 }
 
+//Função para printar a matriz resultado
 void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
     int i, j;
 
@@ -96,9 +113,12 @@ void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
     }
 }
 
+//Função para transformar a matriz resultado em uma string para o historico
 void matriz_historico(char *entrada, double *matrizresultado, dimensao tamanho){
     int i, j;
-    char matrizstr[50];
+    char matrizstr[5000];
+    /*inicia o ponteiro entrada como uma string qualquer para
+    transformar o resultado matricial em uma string para o*/
     entrada[0] = '\0';
 
     for(i = 0; i< tamanho.linha; i++){
