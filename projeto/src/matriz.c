@@ -109,5 +109,6 @@ void matriz_historico(char *entrada, double *matrizresultado, dimensao tamanho){
         }
         strcat(entrada, "|\n");
     }
+    strcat(entrada, "\n");
     
 }

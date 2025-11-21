@@ -15,10 +15,10 @@ char *alocarhistorico(int tamanho){
 }
 
 char *adicionarhistorico(char *hist, char *entrada, int *espacousado, int *tamanho){
-    int espaconecessario = *espacousado + strlen(entrada) + 2;
+    int espaconecessario = *espacousado + strlen(entrada) + 3;
 
     if(espaconecessario > *tamanho){
-        int novotamanho = *tamanho + 100;
+        int novotamanho = *tamanho * 100;
         char *novohist = alocarhistorico(novotamanho);
 
         if(novohist == NULL){
@@ -37,6 +37,12 @@ char *adicionarhistorico(char *hist, char *entrada, int *espacousado, int *taman
 
     return hist;
 
+}
+
+char *limparhistorico(char *hist){
+    hist[0] = '\0';
+
+    return hist;
 }
 
 void mostrarhistorico(char *hist){

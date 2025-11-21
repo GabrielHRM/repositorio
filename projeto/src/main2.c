@@ -16,6 +16,7 @@ void menuprincipal(){
     printf("5. Fatorial\n");
     printf("6. Matrizes\n");
     printf("7. Mostrar Historico\n");
+    printf("8. Limpar historico\n");
     printf("0. Sair\n\n");
     printf("Selecione uma opcao do menu principal:\n");
 }
@@ -40,7 +41,7 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
     scanf("%lf %lf", &n1, &n2);
 
     char operacao;
-    char entrada[200];
+    char entrada[5000];
     
 
     switch (opcao){
@@ -96,7 +97,7 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
     }
 
     int x, y;
-    char entrada[200];
+    char entrada[5000];
 
     switch (opcao){
         case 1:
@@ -154,8 +155,8 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
 
     double graus, radianos;
     long double pi = 3.14159265358979323846;
-    char operacao[20];
-    char entrada[200];
+    char operacao[100];
+    char entrada[5000];
 
     printf("Digite o valor do angulo em graus:\n");
     scanf("%lf", &graus);
@@ -231,7 +232,7 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
     }
 
     long int b, x, y, n;
-    char entrada[200];
+    char entrada[5000];
 
     do{
         printf("Digite os valores da base e dos dos logaritimandos:\n");
@@ -321,7 +322,7 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
         menor = y;
     }
 
-    char entrada[200];
+    char entrada[5000];
 
     switch (opcao){
         case 1:
@@ -458,13 +459,17 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
             break;
         case 7:
             mostrarhistorico(hist);
+            break;
+        case 8:
+            hist = limparhistorico(hist);
+            break;
         default:
             break;
     }
 }
 
 int main(){
-    int tamanho_inicial_historico = 100;
+    int tamanho_inicial_historico = 1000;
     int espacousado = 0;
     int opcao;
     char *historico = alocarhistorico(tamanho_inicial_historico);
