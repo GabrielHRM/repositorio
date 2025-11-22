@@ -21,8 +21,9 @@ void menuprincipal(){
     printf("4. Logaritmos\n");
     printf("5. Fatorial\n");
     printf("6. Matrizes\n");
-    printf("7. Mostrar Historico\n");
-    printf("8. Limpar historico\n");
+    printf("7. Fatoracao em primos\n");
+    printf("8. Mostrar Historico\n");
+    printf("9. Limpar historico\n");
     printf("0. Sair\n\n");
     printf("Selecione uma opcao do menu principal:\n");
 }
@@ -468,6 +469,23 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     return hist;
 }
 
+char *fatoracao_em_primos(char *hist, int *espacousado, int *tamanho){
+    printf("======= FATORACAO EM PRIMOS =======\n");
+
+    long long int n;
+    char *string_fatoracao;
+    printf("Entre com o numero para ser decomposto em fatores primos:\n");
+    scanf("%lld", &n);
+
+    string_fatoracao = fatoracao_primos(n);
+
+    printf("Resultado:\n");
+    printf("%s", string_fatoracao);
+
+    hist = adicionarhistorico(hist, string_fatoracao, espacousado, tamanho);
+
+    return hist;
+}
 
 /*Função para processar as opções do menu principal*/
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
@@ -492,9 +510,12 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
             hist = operacao_com_matrizes(hist, espacousado, tamanho);
             break;
         case 7:
-            mostrarhistorico(hist);
+            hist = fatoracao_em_primos(hist, espacousado, tamanho);
             break;
         case 8:
+            mostrarhistorico(hist);
+            break;
+        case 9:
             hist = limparhistorico(hist);
             break;
         default:
