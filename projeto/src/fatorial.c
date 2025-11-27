@@ -20,6 +20,24 @@ long long int fatinicial(long long int x){
     return resultado;
 }
 
+int *alocar_vetor(long int n){
+    int *primos_potencias = (int*)malloc(n*sizeof(int));
+    if(primos_potencias == NULL){
+        return NULL;
+    }
+
+    return primos_potencias;
+}
+
+char *alocar_str_vetor(long int n){
+    char *primos_str = (char*)malloc(2000*sizeof(char));
+    if(primos_str == NULL){
+        return NULL;
+    }
+    primos_str[0] = '\0';
+    return primos_str;
+}
+
 char *fatoracao_primos(long long int n){
     /*3 indices: 1 para os fatores primos, outro para os indices dos vetores
     das potencias dos fatores primos e das potencias e o ultimo é para
@@ -29,16 +47,16 @@ char *fatoracao_primos(long long int n){
     int k;
     int potencia;
     /*Alocação de memoria dos vetores dos fatores primos e suas potencia.*/
-    int *primos = (int*)malloc(2000*sizeof(int));
-    int *potencia_primos = (int*)malloc(2000*sizeof(int));
+    int *primos;
+    int *potencia_primos;
+    primos = alocar_vetor(2000);
+    potencia_primos = alocar_vetor(2000);
     /*Alocação de memoria das strings que serão manipuladas para levar
     o resultado até o histórico*/
-    char *entrada = (char*)malloc(2000*sizeof(char));
-    char *string_final = (char*)malloc(2000*sizeof(char));
-
-    
-    entrada[0] = '\0';
-    string_final[0] = '\0';
+    char *entrada;
+    char *string_final;
+    entrada = alocar_str_vetor(2000);
+    string_final = alocar_str_vetor(2000);
 
     sprintf(string_final, "%lld = ", n);
     /*O esquema é ir reduzindo o valor de n até 1 por divisões.

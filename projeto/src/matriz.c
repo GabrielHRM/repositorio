@@ -30,6 +30,10 @@ double *alocarmatriz(dimensao tamanho){
     usando os principios de matrizes, sendo, para todos os propósitos, uma matriz.*/
     double *matriz = (double*)malloc(tamanho.linha*tamanho.coluna*sizeof(double));
 
+    if(matriz == NULL){
+        return NULL;
+    }
+
     return matriz;
 }
 
@@ -37,6 +41,10 @@ double *alocarmatriz(dimensao tamanho){
 já que envolve */
 double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
     double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
+
+    if(matriz == NULL){
+        return NULL;
+    }
 
     return matriz;
 }
