@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 /*-------------------------------------*/
-/*O projeto foi modularizado, então foram criadas 3 arquivos.h e 3 arquivos.c
+/*O projeto foi modularizado, então foram criadas 6 arquivos.h e 6 arquivos.c
 com as respectivas funções que eram desnecessarias ficarem no aquivo main2.c
 devido a poluição visual e a quantidade absurda de linhas*/
 #include "matriz.h" 
