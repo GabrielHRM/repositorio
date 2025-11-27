@@ -60,8 +60,11 @@ double mediana(double *v, long int n){
 //Calculo da moda
 double moda(double *v, long int n){
     int i, j;
-    double *v2 = (double*)calloc(n,sizeof(double));
+    double *v2 = (double*)malloc(n*sizeof(double));
 
+    for(i = 0; i<n; i++){
+        v2[i] = 0;
+    }
 
     for(i = 0; i<n; i++){
         for(j = 0; j<n; j++){
