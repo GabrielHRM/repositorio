@@ -28,7 +28,7 @@ double *alocarmatriz(dimensao tamanho){
     Visualmente e na memoria alocada, fica parecido com um vetor comum,
     o proprio compilador acha que é um vetor, mas ele é trabalhado
     usando os principios de matrizes, sendo, para todos os propósitos, uma matriz.*/
-    double *matriz = (double*)malloc(tamanho.linha*tamanho.coluna*sizeof(double));
+    double *matriz = (double*)calloc(tamanho.linha*tamanho.coluna, sizeof(double));
 
     return matriz;
 }
@@ -36,7 +36,7 @@ double *alocarmatriz(dimensao tamanho){
 /*alocação de memoria da matriz resultado multiplicação matricial,
 já que envolve */
 double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
-    double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
+    double *matriz = (double*)calloc(tamanho1.linha*tamanho2.coluna,sizeof(double));
 
     return matriz;
 }
