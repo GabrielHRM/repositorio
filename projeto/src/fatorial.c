@@ -86,7 +86,7 @@ char *fatoracao_primos(long long int n){
         sprintf(entrada, "%d^%d", primos[k], potencia_primos[k]);
         //Concatena a string entrada para string final que será retornada
         strcat(string_final, entrada);
-        //Medida de segurança para menos o ultimo indice da string tenha o ' x '
+        //Medida de segurança para que menos o ultimo indice da string tenha o ' x '
         if(k < tamanho - 1){
             strcat(string_final, " x ");
         }
