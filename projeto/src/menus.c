@@ -481,6 +481,9 @@ char *fatoracao_em_primos(char *hist, int *espacousado, int *tamanho){
     scanf("%lld", &n);
 
     string_fatoracao = fatoracao_primos(n);
+    if(string_fatoracao == NULL){
+        return fatoracao_em_primos(hist, espacousado, tamanho);
+    }
 
     printf("Resultado:\n");
     printf("%s", string_fatoracao);

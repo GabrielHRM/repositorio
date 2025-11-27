@@ -49,14 +49,14 @@ char *fatoracao_primos(long long int n){
     /*Alocação de memoria dos vetores dos fatores primos e suas potencia.*/
     int *primos;
     int *potencia_primos;
-    primos = alocar_vetor(2000);
-    potencia_primos = alocar_vetor(2000);
+    primos = alocar_vetor(20000);
+    potencia_primos = alocar_vetor(20000);
     /*Alocação de memoria das strings que serão manipuladas para levar
     o resultado até o histórico*/
     char *entrada;
     char *string_final;
-    entrada = alocar_str_vetor(2000);
-    string_final = alocar_str_vetor(2000);
+    entrada = alocar_str_vetor(20000);
+    string_final = alocar_str_vetor(20000);
 
     sprintf(string_final, "%lld = ", n);
     /*O esquema é ir reduzindo o valor de n até 1 por divisões.
