@@ -10,6 +10,7 @@ devido a poluição visual e a quantidade absurda de linhas*/
 #include "fatorial.h"
 #include "historico.h"
 #include "estrutura.h"
+#include "estatistica.h"
 /*-------------------------------------*/
 
 //Menu principal
@@ -22,8 +23,9 @@ void menuprincipal(){
     printf("5. Fatorial\n");
     printf("6. Matrizes\n");
     printf("7. Fatoracao em primos\n");
-    printf("8. Mostrar Historico\n");
-    printf("9. Limpar historico\n");
+    printf("8. Estatistica\n");
+    printf("9. Mostrar Historico\n");
+    printf("10. Limpar historico\n");
     printf("0. Sair\n\n");
     printf("Selecione uma opcao do menu principal:\n");
 }
@@ -487,6 +489,69 @@ char *fatoracao_em_primos(char *hist, int *espacousado, int *tamanho){
     return hist;
 }
 
+char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
+    printf("\n=== OPERACOES ESTATISTICAS ===\n");
+    printf("1. Media.\n");
+    printf("2. Mediana.\n");
+    printf("3. Moda.\n");
+    printf("4. Desvio padrao.\n\n");
+
+    int opcao;
+    printf("Selecione uma opcao do menu:\n");
+    scanf("%d", &opcao);
+    while(opcao < 1 || opcao > 4){
+        printf("Opcao invalida. Tente Novamente.\n");
+        scanf("%d", &opcao);
+    }
+    long int n;
+    double r1, r2, r3, r4;
+
+    printf("Leia o numero de elementos para a operacao:\n");
+    scanf("%ld", &n);
+    double *v = (double*)malloc(n*sizeof(double));
+    printf("Leia uma sequencia de inteiros:\n");
+    ler_vetor_numero(v, n);
+    insertion_short(v, n);
+
+    char entrada[5000];
+    
+    /*Se o usuario quiser ver apenas uma das opcoes abaixo apartir da 
+    sequencia de numeros, o switch serve para isso*/
+    switch (opcao){
+    case 1:
+        r1 = media(v, n);
+        printf("Resultado: %.2lf\n", r1);
+        break;
+    case 2:
+        r2 = mediana(v, n);
+        printf("Resultado: %.2lf\n", r2);
+        break;
+    case 3:
+        r3 = moda(v, n);
+        printf("Resultado: %.2lf\n", r3);
+        break;
+    case 4:
+        r4 = desvio_padrao(v, n);
+        printf("Resultado: %.2lf\n", r4);
+    default:
+        break;
+    }
+    /*Aqui as respostas das 4 opções, baseadas em uma unica sequencia nuemrica
+    são chamadas juntas novamente para serem colocadas todas em uma unica 
+    string e vista no histórico*/
+    r1 = media(v, n);
+    r2 = mediana(v, n);
+    r3 = moda(v, n);
+    r4 = desvio_padrao(v, n);
+
+    sprintf(entrada, "Media: %.2lf || Mediana: %.2lf || Moda: %.2lf || Desvio padrao: %.2lf\n", r1, r2, r3, r4);
+    printf("%s", entrada);
+
+    free(v);
+    hist = adicionarhistorico(hist, entrada, espacousado, tamanho);
+    return hist;
+}
+
 /*Função para processar as opções do menu principal*/
 void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
     double resposta, resposta2;
@@ -513,9 +578,12 @@ void processar_opcao(int opcao, char *hist, int *espacousado, int *tamanho){
             hist = fatoracao_em_primos(hist, espacousado, tamanho);
             break;
         case 8:
-            mostrarhistorico(hist);
+            hist = operacoes_estatisticas(hist, espacousado, tamanho);
             break;
         case 9:
+            mostrarhistorico(hist);
+            break;
+        case 10:
             hist = limparhistorico(hist);
             break;
         default:
