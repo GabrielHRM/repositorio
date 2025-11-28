@@ -490,6 +490,8 @@ char *fatoracao_em_primos(char *hist, int *espacousado, int *tamanho){
 
     hist = adicionarhistorico(hist, string_fatoracao, espacousado, tamanho);
 
+    free(string_fatoracao);
+
     return hist;
 }
 
