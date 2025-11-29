@@ -147,7 +147,8 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
     /*Um unico for para percorrer de uma vez, linha por linha, de cada matriz e assim formatar no 
     historico dessa forma: matriz 1 "operador" matriz 2 = matriz resultado*/
     for(i = 0; i< max_linhas; i++){
-        /*Sequencia de condicionais para verificar o tamanho da coluna das 3 matrizes
+        /*Sequencia de condicionais para verificar a quantidade de linhas e colunas que cada uma das
+        3 matrizes podem possuir, e depois adiciona-las a string do resultado matricial 
         (o mesmo se aplica as outras 3 matrizes)*/
         if(i < tamanho1.linha){
             strcat(entrada, "|");
@@ -156,6 +157,7 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
                     " 100.00" tem 7 caracteres(os numeros + o espaço antes do número)*/
                     sprintf(resultado, "%7.2lf", m1[i * tamanho1.coluna + j]);
                     strcat(entrada, resultado);
+                    //Garante um espaço vazio entre cada número da matriz
                     if(j < tamanho1.coluna - 1){
                         strcat(entrada, " ");
                 }
@@ -211,7 +213,7 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
             }
         }
 
-        /*Coloca o dinal de igual apenas na primeira linha lida(i = 0) e 3 espaços vazios para
+        /*Coloca o sinal de igual apenas na primeira linha lida(i = 0) e 3 espaços vazios para
         organização*/
         if(i == 0){
             strcat(entrada, " = ");
