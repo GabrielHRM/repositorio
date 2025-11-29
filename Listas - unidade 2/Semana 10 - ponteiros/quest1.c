@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+//Função para alocação dinamica de memoria
 int *alocarvetor(int tamanho){
     int *vetor = (int*)malloc(tamanho*sizeof(int));
 
@@ -16,6 +16,7 @@ void lervetor(int *vet, int tamanho){
         scanf("%d", &vet[i]);
     }
 }
+
 
 int *somavetorial(int *u, int *v, int n1, int n2){
     int *soma, i;
@@ -51,9 +52,11 @@ int main(){
         for(int i = 0; i<n1; i++){
             printf(" %d", soma[i]);
         }
+        //Libera o espaço de memoria alocado para o vetor resultado
         free(soma);
     }
 
+    //Libera o espaço de memoria alocado para os 2 vetores da opração
     free(u);
     free(v);
     

@@ -17,6 +17,7 @@ void fertil(int agro[][100], int m, int n){
     int i, j, cont = 0, cont2 = 0;
     int irrigados[10][10] = {0};
 
+    //Define como 1 os lugares irrigados pelos irigadora(m[i][j] = 2)
     for(i = 0; i<m; i++){
         for(j = 0; j<n; j++){
             if(agro[i][j] == 2){
@@ -31,7 +32,9 @@ void fertil(int agro[][100], int m, int n){
     }
     for(i = 0; i < m; i++){
         for(j = 0; j < n; j++){
+            //Verifica os lugares irrigados
             if(agro[i][j] == 1){
+                //Verifica se na matriz do campo(agro) está de fato irrigado(irrigado[i][j] = 1)
                 if(irrigados[i][j] == 1){
                     cont++;
                 }else{

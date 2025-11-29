@@ -15,11 +15,14 @@ int main(){
 
     int len = strlen(placa);
 
+    //Outra forma para garantir o terminador \0 no final da string
     if(placa[len-1] == '\n')
         len--;
     
+    //Placa brasileira
     if(len == 8 && placa[3] == '-'){
         for(i = 0; i < 3; i++){
+            /*Verifica se a placa não faz parte do alfabeto ou não é maiuscula*/
             if(!isalpha(placa[i]) || !isupper(placa[i])){
                 valida = 0;
                 break;
@@ -27,6 +30,7 @@ int main(){
         }
 
         for(i = 4; i < 8; i++){
+            //Verifica se não é digito
             if(!isdigit(placa[i])){
                 valida = 0;
                 break;
@@ -37,6 +41,7 @@ int main(){
             printf("Brasileira\n");
             return 0;
         }
+    //Placa Mercosul
     }else if(len == 7){
         if(!isdigit(placa[3])){
             valida = 0;

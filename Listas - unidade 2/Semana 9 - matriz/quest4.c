@@ -13,16 +13,19 @@ void ler_matriz(int matriz[][100], int m){
     }
 }
 
-void viagem_custo(int matriz[][100], int m, int x, int z){
+void viagem_custo(int cidade[][100], int m, int x, int z){
     int y;
 
-    int custo_direto = matriz[x][z];
+    int custo_direto = cidade[x][z];
     int melhor_custo = custo_direto;
+    //Força um valor para futura comparação
     int melhory = -1;
 
     for(y = 0; y<m; y++){
         if(y != x && y != z){
-            int custo = matriz[x][y] + matriz[y][z];
+            //Custo = (CA -> CB) + (CB + CC)
+            int custo = cidade[x][y] + cidade[y][z];
+            //Comparação simples para saber qual custo é maior
             if(custo < melhor_custo){
                 melhor_custo = custo;
                 melhory = y;
@@ -30,7 +33,7 @@ void viagem_custo(int matriz[][100], int m, int x, int z){
         }
     }
 
-    if(melhor_custo == matriz[x][z]){
+    if(melhor_custo == cidade[x][z]){
         printf("%d-%d R$%d", x, z, melhor_custo);
     }else if(melhory != -1){
         printf("%d-%d-%d R$%d", x, melhory, z, melhor_custo);

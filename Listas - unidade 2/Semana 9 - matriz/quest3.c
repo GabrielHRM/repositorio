@@ -18,6 +18,7 @@ void times_empate(int matriz[][100], int m){
     int empate = 0;
 
     for(i = 0; i<m; i++){
+        //Garante a não verificação da diagonal
         for(j = i+1; j<m; j++){
             if(matriz[i][j] == matriz[j][i])
                 empate++;

@@ -14,6 +14,8 @@ void maior(int vet[12], char vet2[12][10]){
     int i, j, temp;
     char temp_mes[10];
 
+    //Ordenação bubble sort
+    //Ordena mês com relação a quantodade de chuva
     for(i = 0; i<12; i++){
         for(j = 0; j<(12-i-1); j++){
             if(vet[j] < vet[j+1]){

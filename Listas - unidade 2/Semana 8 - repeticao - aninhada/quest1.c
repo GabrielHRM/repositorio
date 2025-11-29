@@ -13,6 +13,7 @@ int main(){
 
     int sorteado[m], apostados[n];
 
+    //Garante as especificações da questão(m e n)
     if(m>=1 && m<=30){
         if(n>=m && n<=50){
             for(i = 0; i < m; i++){
