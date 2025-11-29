@@ -136,18 +136,42 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
     transformar o resultado matricial em uma string para o*/
     entrada[0] = '\0';
 
+    int max_linhas = tamanho1.linha;
+    if(tamanho2.linha > max_linhas){
+        max_linhas = tamanho2.linha;
+    }
+    if(tamanho3.linha > max_linhas){
+        max_linhas = tamanho3.linha;
+    }
+
     /*Um unico for para percorrer de uma vez, linha por linha, de cada matriz e assim formatar no 
     historico dessa forma: matriz 1 "operador" matriz 2 = matriz resultado*/
-    for(i = 0; i< tamanho1.linha; i++){
-        strcat(entrada, "|");
-        for(j = 0; j < tamanho1.coluna; j++){
-            sprintf(resultado, "%7.2lf", m1[i * tamanho1.coluna + j]);
-            strcat(entrada, resultado);
-            if(j < tamanho1.coluna - 1){
+    for(i = 0; i< max_linhas; i++){
+        /*Sequencia de condicionais para verificar o tamanho da coluna das 3 matrizes
+        (o mesmo se aplica as outras 3 matrizes)*/
+        if(i < tamanho1.linha){
+            strcat(entrada, "|");
+                for(j = 0; j < tamanho1.coluna; j++){
+                    /*Formatação dos núemros da matriz. 7.2lf == " 100.00"
+                    " 100.00" tem 7 caracteres(os numeros + o espaço antes do número)*/
+                    sprintf(resultado, "%7.2lf", m1[i * tamanho1.coluna + j]);
+                    strcat(entrada, resultado);
+                    if(j < tamanho1.coluna - 1){
+                        strcat(entrada, " ");
+                }
+            }
+            strcat(entrada, "|");
+        }else{
+            //Verifica as colunas de cada matriz
+            /*8 como medida de segurança para a formatação 7.2lf e 1 apenas para a formatação
+            não sair desalinhada*/
+            int espaco_coluna = 1 + (8 * tamanho1.coluna);
+            int k;
+            for(k = 0; k<espaco_coluna; k++){
                 strcat(entrada, " ");
             }
         }
-        strcat(entrada, "|");
+        
 
         /*Coloca o operador apenas na primeira linha lida(i = 0) e 3 espaços vazios para
         organização*/
@@ -168,16 +192,24 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
         }else{
             strcat(entrada, "   ");
         }
-
-        for(j = 0; j < tamanho2.coluna; j++){
+        
+        if(i < tamanho2.linha){
             strcat(entrada, "|");
-            sprintf(resultado, "%7.2lf", m2[i * tamanho2.coluna + j]);
-            strcat(entrada, resultado);
-            if(j < tamanho2.coluna - 1){
+            for(j = 0; j < tamanho2.coluna; j++){
+                sprintf(resultado, "%7.2lf", m2[i * tamanho2.coluna + j]);
+                strcat(entrada, resultado);
+                if(j < tamanho2.coluna - 1){
+                    strcat(entrada, " ");
+                }
+            }
+            strcat(entrada, "|");
+        }else{
+            int espaco_coluna = 1 + (8 * tamanho2.coluna);
+            int k;
+            for(k = 0; k<espaco_coluna; k++){
                 strcat(entrada, " ");
             }
         }
-        strcat(entrada, "|");
 
         /*Coloca o dinal de igual apenas na primeira linha lida(i = 0) e 3 espaços vazios para
         organização*/
@@ -187,16 +219,25 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
             strcat(entrada, "   ");
         }
 
-        strcat(entrada, "|");
-        for(j = 0; j < tamanho3.coluna; j++){
-            sprintf(matrizstr, "%7.2lf", matrizresultado[i * tamanho3.coluna + j]);
-            strcat(entrada, matrizstr);
-            if(j < tamanho3.coluna - 1){
+        if(i < tamanho3.linha){
+            strcat(entrada, "|");
+            for(j = 0; j < tamanho3.coluna; j++){
+                sprintf(matrizstr, "%7.2lf", matrizresultado[i * tamanho3.coluna + j]);
+                strcat(entrada, matrizstr);
+                if(j < tamanho3.coluna - 1){
+                    strcat(entrada, " ");
+                }
+            }
+            strcat(entrada, "|");
+        }else{
+            int espaco_coluna = 1 + (8 * tamanho3.coluna);
+            int k;
+            for(k = 0; k<espaco_coluna; k++){
                 strcat(entrada, " ");
             }
         }
-        strcat(entrada, "|");
-        if(i < tamanho1.linha - 1){
+
+        if(i < max_linhas - 1){
             strcat(entrada, "\n");
         }
     }
