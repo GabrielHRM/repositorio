@@ -64,7 +64,7 @@ char *operacoesbasicas(char *hist, double *resultado, int *espacousado, int *tam
     em strings serão então armazenadas em uma string maior, que é o historico,
     não havendo a necesidade de alocar dinamicamente cada string. Bastando apenas
     definir o tamanho da string historico que será atualizada com o tempo*/
-    char entrada[5000];
+    char entrada[50000];
     
 
     /*O ponteiro resultado serve tanto para armazenar o resultado da operação
@@ -127,7 +127,7 @@ char *potenciaseraizes(char *hist, double *resultado, int *espacousado, int *tam
     }
 
     int x, y;
-    char entrada[5000];
+    char entrada[50000];
 
     switch (opcao){
         case 1:
@@ -185,7 +185,7 @@ char *trigonometricos(char *hist, double *resultado, int *espacousado, int *tama
 
     double graus, radianos;
     long double pi = 3.14159265358979323846;
-    char entrada[5000];
+    char entrada[50000];
 
     printf("Digite o valor do angulo em graus:\n");
     scanf("%lf", &graus);
@@ -255,7 +255,7 @@ char *logaritimos(double *resultado2, double *resultado, char *hist, int *espaco
     }
 
     long int b, x, y, n;
-    char entrada[5000];
+    char entrada[50000];
 
     /*Esse laço de repetição vai garantir que os valores de x e y
     não sejam numero <= 0 para as operações logaritimicas*/
@@ -351,7 +351,7 @@ char *fatorial(double *resultado2, double *resultado, char *hist, int *espacousa
         menor = y;
     }
 
-    char entrada[5000];
+    char entrada[50000];
 
     switch (opcao){
         case 1:
@@ -410,6 +410,20 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     //alocação dinamica das matrizes
     matriz1 = alocarmatriz(tamanho1);
     matriz2 = alocarmatriz(tamanho2);
+
+    //Recursão caso a alocação de momoria falhe
+    if(matriz1 == NULL || matriz2 == NULL){
+        printf("Erro: Nao foi possivel alocar memoria para as matrizes!\n");
+        if(matriz1 != NULL){
+             free(matriz1);
+        }
+        if(matriz2 != NULL){ 
+            free(matriz2);
+        }
+        return operacao_com_matrizes(hist, espacousado, tamanho);
+    }
+
+
     printf("Porfavor, leia as matrizes:\n");
     ler_matriz(matriz1, tamanho1);
     ler_matriz(matriz2, tamanho2);
@@ -431,6 +445,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             }else{
                 /*Recursão simples para retornar ao inicio dessa função
                 para uma nova seleção de opções e valores de matrizes*/
+                free(matriz1);
+                free(matriz2);
                 printf("Opcao invalida. Tente novamente.");
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
@@ -446,6 +462,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);
             }else{
+                free(matriz1);
+                free(matriz2);
                 printf("Opcao invalida. Tente novamente.");
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
@@ -462,6 +480,8 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
                 free(resultado);
             }else{
                 printf("Opcao invalida. Tente novamente.");
+                free(matriz1);
+                free(matriz2);
                 return operacao_com_matrizes(hist, espacousado, tamanho);
             }
             break;
@@ -522,7 +542,7 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
     ler_vetor_numero(v, n);
     insertion_short(v, n);
 
-    char entrada[5000];
+    char entrada[50000];
     
     /*Se o usuario quiser ver apenas uma das opcoes abaixo apartir da 
     sequencia de numeros, o switch serve para isso*/

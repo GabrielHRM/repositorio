@@ -40,10 +40,13 @@ double *alocarmatriz(dimensao tamanho){
 /*alocação de memoria da matriz resultado multiplicação matricial,
 já que envolve */
 double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
+    int i, j;
     double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
 
-    if(matriz == NULL){
-        return NULL;
+    for(i = 0; i<tamanho1.linha; i++){
+        for(j = 0; j < tamanho2.coluna; j++){
+            matriz[i * tamanho2.coluna + j] = 0;
+        }
     }
 
     return matriz;
@@ -89,11 +92,6 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, dimensao taman
     if(tamanho1.coluna == tamanho2.linha){
         resultado = alocarmatrizmult(tamanho1, tamanho2);
 
-        for(i = 0; i<tamanho1.linha; i++){
-            for(j = 0; j < tamanho1.coluna; j++){
-                resultado[i * tamanho1.coluna + j] = 0;
-            }
-        }
         /*
           A lógica padrão é:  
           resultado[i][j] += m1[i][k] * m2[k][j]
@@ -130,7 +128,7 @@ void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
 //Função para transformar a matriz resultado em uma string para o historico
 void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho1, dimensao tamanho2, dimensao tamanho3, int opcao){
     int i, j;
-    char matrizstr[5000];
+    char matrizstr[50000];
     char resultado[50000];
     /*inicia o ponteiro entrada como uma string qualquer para
     transformar o resultado matricial em uma string para o*/
