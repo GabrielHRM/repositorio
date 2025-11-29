@@ -149,6 +149,8 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
         }
         strcat(entrada, "|");
 
+        /*Coloca o operador apenas na primeira linha lida(i = 0) e 3 espaços vazios para
+        organização*/
         if(i == 0){
             switch (opcao){
                 case 1:
@@ -177,6 +179,8 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
         }
         strcat(entrada, "|");
 
+        /*Coloca o dinal de igual apenas na primeira linha lida(i = 0) e 3 espaços vazios para
+        organização*/
         if(i == 0){
             strcat(entrada, " = ");
         }else{
@@ -197,5 +201,4 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
         }
     }
     strcat(entrada, "\n");
-
 }
