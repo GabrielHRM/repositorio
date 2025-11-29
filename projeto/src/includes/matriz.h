@@ -15,6 +15,6 @@ double *multiplicacao_matricial(double *matriz1, double *matriz2, dimensao taman
 
 void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho);
 
-void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho);
+void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho1, dimensao tamanho2, dimensao tamanho3, int opcao);
 
 #endif

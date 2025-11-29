@@ -128,7 +128,7 @@ void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
 }
 
 //Função para transformar a matriz resultado em uma string para o historico
-void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho){
+void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho1, dimensao tamanho2, dimensao tamanho3, int opcao){
     int i, j;
     char matrizstr[5000];
     char resultado[50000];
@@ -136,33 +136,65 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
     transformar o resultado matricial em uma string para o*/
     entrada[0] = '\0';
 
-    for(i = 0; i< tamanho.linha; i++){
+    /*Um unico for para percorrer de uma vez, linha por linha, de cada matriz e assim formatar no 
+    historico dessa forma: matriz 1 "operador" matriz 2 = matriz resultado*/
+    for(i = 0; i< tamanho1.linha; i++){
         strcat(entrada, "|");
-        for(j = 0; j < tamanho.coluna; j++){
-            sprintf(resultado, "%7.2lf ", m1[i * tamanho.coluna + j]);
-            strcat(entrada, m1);
+        for(j = 0; j < tamanho1.coluna; j++){
+            sprintf(resultado, "%7.2lf", m1[i * tamanho1.coluna + j]);
+            strcat(entrada, resultado);
+            if(j < tamanho1.coluna - 1){
+                strcat(entrada, " ");
+            }
         }
-        strcat(entrada, "|\n");
-    }
-    strcat(entrada, " * ");
-
-    for(i = 0; i< tamanho.linha; i++){
         strcat(entrada, "|");
-        for(j = 0; j < tamanho.coluna; j++){
-            sprintf(resultado, "%7.2lf ", m2[i * tamanho.coluna + j]);
-            strcat(entrada, m2);
+
+        if(i == 0){
+            switch (opcao){
+                case 1:
+                    strcat(entrada, " + ");
+                    break;
+                case 2:
+                    strcat(entrada, " - ");
+                    break;
+                case 3:
+                    strcat(entrada, " * ");
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            strcat(entrada, "   ");
         }
-        strcat(entrada, "|\n");
-    }
-    strcat(entrada, " = ");
 
-    for(i = 0; i< tamanho.linha; i++){
+        for(j = 0; j < tamanho2.coluna; j++){
+            strcat(entrada, "|");
+            sprintf(resultado, "%7.2lf", m2[i * tamanho2.coluna + j]);
+            strcat(entrada, resultado);
+            if(j < tamanho2.coluna - 1){
+                strcat(entrada, " ");
+            }
+        }
         strcat(entrada, "|");
-        for(j = 0; j < tamanho.coluna; j++){
-            sprintf(matrizstr, "%7.2lf ", matrizresultado[i * tamanho.coluna + j]);
+
+        if(i == 0){
+            strcat(entrada, " = ");
+        }else{
+            strcat(entrada, "   ");
+        }
+
+        strcat(entrada, "|");
+        for(j = 0; j < tamanho3.coluna; j++){
+            sprintf(matrizstr, "%7.2lf", matrizresultado[i * tamanho3.coluna + j]);
             strcat(entrada, matrizstr);
+            if(j < tamanho3.coluna - 1){
+                strcat(entrada, " ");
+            }
         }
-        strcat(entrada, "|\n");
+        strcat(entrada, "|");
+        if(i < tamanho1.linha - 1){
+            strcat(entrada, "\n");
+        }
     }
     strcat(entrada, "\n");
 
