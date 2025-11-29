@@ -547,23 +547,23 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
     /*Se o usuario quiser ver apenas uma das opcoes abaixo apartir da 
     sequencia de numeros, o switch serve para isso*/
     switch (opcao){
-    case 1:
-        r1 = media(v, n);
-        printf("Resultado: %.2lf\n", r1);
-        break;
-    case 2:
-        r2 = mediana(v, n);
-        printf("Resultado: %.2lf\n", r2);
-        break;
-    case 3:
-        r3 = moda(v, n);
-        printf("Resultado: %.2lf\n", r3);
-        break;
-    case 4:
-        r4 = desvio_padrao(v, n);
-        printf("Resultado: %.2lf\n", r4);
-    default:
-        break;
+        case 1:
+            r1 = media(v, n);
+            printf("Resultado: %.2lf\n", r1);
+            break;
+        case 2:
+            r2 = mediana(v, n);
+            printf("Resultado: %.2lf\n", r2);
+            break;
+        case 3:
+            r3 = moda(v, n);
+            printf("Resultado: %.2lf\n", r3);
+            break;
+        case 4:
+            r4 = desvio_padrao(v, n);
+            printf("Resultado: %.2lf\n", r4);
+        default:
+            break;
     }
     /*Aqui as respostas das 4 opções, baseadas em uma unica sequencia nuemrica
     são chamadas juntas novamente para serem colocadas todas em uma unica 
