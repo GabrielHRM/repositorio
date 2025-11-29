@@ -128,12 +128,33 @@ void imprimir_matriz_resultado(double *matrizresultado, dimensao tamanho){
 }
 
 //Função para transformar a matriz resultado em uma string para o historico
-void matriz_historico(char *entrada, double *matrizresultado, dimensao tamanho){
+void matriz_historico(char *entrada, double *matrizresultado, double *m1, double*m2, dimensao tamanho){
     int i, j;
     char matrizstr[5000];
+    char resultado[50000];
     /*inicia o ponteiro entrada como uma string qualquer para
     transformar o resultado matricial em uma string para o*/
     entrada[0] = '\0';
+
+    for(i = 0; i< tamanho.linha; i++){
+        strcat(entrada, "|");
+        for(j = 0; j < tamanho.coluna; j++){
+            sprintf(resultado, "%7.2lf ", m1[i * tamanho.coluna + j]);
+            strcat(entrada, m1);
+        }
+        strcat(entrada, "|\n");
+    }
+    strcat(entrada, " * ");
+
+    for(i = 0; i< tamanho.linha; i++){
+        strcat(entrada, "|");
+        for(j = 0; j < tamanho.coluna; j++){
+            sprintf(resultado, "%7.2lf ", m2[i * tamanho.coluna + j]);
+            strcat(entrada, m2);
+        }
+        strcat(entrada, "|\n");
+    }
+    strcat(entrada, " = ");
 
     for(i = 0; i< tamanho.linha; i++){
         strcat(entrada, "|");

@@ -383,13 +383,12 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
     printf("\n=== OPERACOES MATRICIAIS ===\n");
     printf("1. Soma matrcial.\n");
     printf("2. Subitracao matricial.\n");
-    printf("3. Multiplicacao matricial.\n");
-    printf("4. Multiplicacao escalar\n\n");
+    printf("3. Multiplicacao matricial.\n\n");
 
     int opcao;
     printf("Selecione uma opcao do menu:\n");
     scanf("%d", &opcao);
-    while(opcao < 1 || opcao > 4){
+    while(opcao < 1 || opcao > 3){
         printf("Opcao invalida. Tente Novamente.\n");
         scanf("%d", &opcao);
     }
