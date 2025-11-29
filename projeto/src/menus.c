@@ -407,13 +407,12 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
         }
     }while(tamanho1.linha <= 0 || tamanho1.coluna <= 0 || tamanho2.linha <= 0|| tamanho2.coluna <= 0);
 
-    //alocação dinamica das matrizes
+    //alocação dinamica das matrizes iniciais
     matriz1 = alocarmatriz(tamanho1);
     matriz2 = alocarmatriz(tamanho2);
 
     //Recursão caso a alocação de momoria falhe
     if(matriz1 == NULL || matriz2 == NULL){
-        printf("Erro: Nao foi possivel alocar memoria para as matrizes!\n");
         if(matriz1 != NULL){
              free(matriz1);
         }
