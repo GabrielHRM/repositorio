@@ -437,7 +437,7 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             tamanho3.linha = tamanho1.linha;
             tamanho3.coluna = tamanho1.coluna;
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, tamanho1);
+                imprimir_matriz_resultado(resultado, tamanho3);
                 matriz_historico(matrizhistorico, resultado, matriz1, matriz2, tamanho1, tamanho2, tamanho3, opcao);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 //Liberando espaço na memoria referente a matriz resultado 
@@ -457,7 +457,7 @@ char *operacao_com_matrizes(char *hist, int *espacousado, int *tamanho){
             tamanho3.linha = tamanho1.linha;
             tamanho3.coluna = tamanho1.coluna;
             if(resultado != NULL){
-                imprimir_matriz_resultado(resultado, tamanho1);
+                imprimir_matriz_resultado(resultado, tamanho3);
                 matriz_historico(matrizhistorico, resultado, matriz1, matriz2, tamanho1, tamanho2, tamanho3, opcao);
                 hist = adicionarhistorico(hist, matrizhistorico, espacousado, tamanho);
                 free(resultado);

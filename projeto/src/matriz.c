@@ -34,6 +34,10 @@ double *alocarmatriz(dimensao tamanho){
         return NULL;
     }
 
+    for(int i = 0; i < tamanho.linha * tamanho.coluna; i++){
+        matriz[i] = 0.0;
+    }
+
     return matriz;
 }
 
@@ -43,10 +47,8 @@ double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
     int i, j;
     double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
 
-    for(i = 0; i<tamanho1.linha; i++){
-        for(j = 0; j < tamanho2.coluna; j++){
-            matriz[i * tamanho2.coluna + j] = 0;
-        }
+    for(int i = 0; i < tamanho1.linha * tamanho2.coluna; i++){
+        matriz[i] = 0.0;
     }
 
     return matriz;
