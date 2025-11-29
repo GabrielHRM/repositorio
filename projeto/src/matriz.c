@@ -136,6 +136,9 @@ void matriz_historico(char *entrada, double *matrizresultado, double *m1, double
     transformar o resultado matricial em uma string para o*/
     entrada[0] = '\0';
 
+    /*Garante que o numero máximos de linhas percorridas seja exatamenteo maior entre eles, já que
+    na multiplicação de matrizes a matriz resultado pode ter um numero de linhas diferente das
+    outras duas matrizes*/
     int max_linhas = tamanho1.linha;
     if(tamanho2.linha > max_linhas){
         max_linhas = tamanho2.linha;
