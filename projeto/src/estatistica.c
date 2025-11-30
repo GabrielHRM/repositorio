@@ -21,7 +21,7 @@ void insertion_short(double *v, long int n){
     }
 }
 
-double *alocar_vetor(int n){
+double *alocar(int n){
     double *v2 = (double*)malloc(n*sizeof(double));
 
     if(v2 == NULL){
@@ -75,7 +75,7 @@ double mediana(double *v, long int n){
 double moda(double *v, long int n){
     int i, j;
     double *v2;
-    v2 = alocar_vetor(n);
+    v2 = alocar(n);
 
     if (v2 == NULL) {
         return 0.0;
@@ -103,10 +103,8 @@ double moda(double *v, long int n){
     if(maior > 1 && imaior != -1){
         mda = v[imaior];
     }
-    if(v2 != NULL){
-        free(v2);
-    }
     
+    free(v2);
 
     return mda;
 }

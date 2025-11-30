@@ -543,35 +543,18 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
         }
     }while(n<1);
 
-    double *v = (double*)malloc(n*sizeof(double));
+    double *v = alocar(n);
+
+    if (v == NULL) {
+        return hist;
+    }
+
     printf("Leia uma sequencia de inteiros:\n");
     ler_vetor_numero(v, n);
     insertion_short(v, n);
 
     char entrada[50000];
-    
-    /*Se o usuario quiser ver apenas uma das opcoes abaixo apartir da 
-    sequencia de numeros, o switch serve para isso*/
-    switch (opcao){
-        case 1:
-            r1 = media(v, n);
-            printf("Resultado: %.2lf\n", r1);
-            break;
-        case 2:
-            r2 = mediana(v, n);
-            printf("Resultado: %.2lf\n", r2);
-            break;
-        case 3:
-            r3 = moda(v, n);
-            printf("Resultado: %.2lf\n", r3);
-            break;
-        case 4:
-            r4 = desvio_padrao(v, n);
-            printf("Resultado: %.2lf\n", r4);
-            break;
-        default:
-            break;
-    }
+
     /*Aqui as respostas das 4 opções, baseadas em uma unica sequencia nuemrica
     são chamadas juntas novamente para serem colocadas todas em uma unica 
     string e vista no histórico*/
@@ -579,6 +562,25 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
     r2 = mediana(v, n);
     r3 = moda(v, n);
     r4 = desvio_padrao(v, n);
+    
+    /*Se o usuario quiser ver apenas uma das opcoes abaixo apartir da 
+    sequencia de numeros, o switch serve para isso*/
+    switch (opcao){
+        case 1:
+            printf("Resultado: %.2lf\n", r1);
+            break;
+        case 2:
+            printf("Resultado: %.2lf\n", r2);
+            break;
+        case 3:
+            printf("Resultado: %.2lf\n", r3);
+            break;
+        case 4:
+            printf("Resultado: %.2lf\n", r4);
+            break;
+        default:
+            break;
+    }
 
     sprintf(entrada, "Media: %.2lf || Mediana: %.2lf || Moda: %.2lf || Desvio padrao: %.2lf\n", r1, r2, r3, r4);
     printf("%s", entrada);
