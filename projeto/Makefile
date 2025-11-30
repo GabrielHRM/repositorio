@@ -7,11 +7,11 @@ LIBS = -lm
 
 # Caminhos corrigidos
 INCLUDES = -I./src/includes
-SRCDIR = ./src/output
-OBJDIR = ./obj
+SRCDIR = src/output
+OBJDIR = obj
 EXEC = main2.exe
 
-# Lista específica de arquivos - REMOVA main.c se não for usar
+# Lista específica de arquivos 
 SRCS = main2.c estatistica.c historico.c fatorial.c matriz.c menus.c estrutura.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
@@ -27,7 +27,7 @@ $(OBJDIR):
 $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS)
 
-# Regra específica para cada arquivo
+# REGRA CORRIGIDA - caminho completo para os arquivos .c
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
