@@ -535,7 +535,14 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
     double r1, r2, r3, r4;
 
     printf("Leia o numero de elementos para a operacao:\n");
-    scanf("%ld", &n);
+
+    do{
+        scanf("%ld", &n);
+        if(n < 1){
+            printf("Valor invalido. Tente novamente.\n");
+        }
+    }while(n<1);
+
     double *v = (double*)malloc(n*sizeof(double));
     printf("Leia uma sequencia de inteiros:\n");
     ler_vetor_numero(v, n);
@@ -561,6 +568,7 @@ char *operacoes_estatisticas(char *hist, int *espacousado, int *tamanho){
         case 4:
             r4 = desvio_padrao(v, n);
             printf("Resultado: %.2lf\n", r4);
+            break;
         default:
             break;
     }

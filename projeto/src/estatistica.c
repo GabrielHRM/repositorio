@@ -9,7 +9,7 @@
 //Ordenação: insertion short
 void insertion_short(double *v, long int n){
     for (int i = 1; i < n; ++i) {
-        int chave = v[i];
+        double chave = v[i];
         int j = i - 1;
 
 
@@ -19,6 +19,20 @@ void insertion_short(double *v, long int n){
         }
         v[j + 1] = chave;
     }
+}
+
+double *alocar_vetor(int n){
+    double *v2 = (double*)malloc(n*sizeof(double));
+
+    if(v2 == NULL){
+        return NULL;
+    }
+
+    for(int i = 0; i<n; i++){
+        v2[i] = 0.0;
+    }
+
+    return v2;
 }
 
 //Ler sequencia de números
@@ -60,10 +74,11 @@ double mediana(double *v, long int n){
 //Calculo da moda
 double moda(double *v, long int n){
     int i, j;
-    double *v2 = (double*)malloc(n*sizeof(double));
+    double *v2;
+    v2 = alocar_vetor(n);
 
-    for(i = 0; i<n; i++){
-        v2[i] = 0;
+    if (v2 == NULL) {
+        return 0.0;
     }
 
     for(i = 0; i<n; i++){
@@ -74,19 +89,24 @@ double moda(double *v, long int n){
         }
     }
     
-    int maior = 0, imaior;
+    double maior = 0.0; 
+    int imaior = -1;
     for(i = 0; i<n; i++){
         if(v2[i] > maior){
             maior = v2[i];
             imaior = i;
         }
     }
-    if(maior <= 1){
-        return 0.0;
-    }
 
-    double mda = v[imaior];
-    free(v2);
+    double mda = 0.0;
+
+    if(maior > 1 && imaior != -1){
+        mda = v[imaior];
+    }
+    if(v2 != NULL){
+        free(v2);
+    }
+    
 
     return mda;
 }
