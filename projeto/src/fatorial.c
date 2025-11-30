@@ -30,7 +30,7 @@ int *alocar_vetor(long int n){
 }
 
 char *alocar_str_vetor(long int n){
-    char *primos_str = (char*)malloc(2000*sizeof(char));
+    char *primos_str = (char*)malloc(n*sizeof(char));
     if(primos_str == NULL){
         return NULL;
     }

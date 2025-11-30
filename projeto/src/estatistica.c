@@ -59,7 +59,6 @@ double media(double *v, long int n){
 
 //Calculo da mediana
 double mediana(double *v, long int n){
-    int i;
     double mdi;
     if(n%2 == 0){
         mdi = v[(n/2) - 1] + v[(n/2)];

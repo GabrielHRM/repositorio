@@ -1,46 +1,28 @@
-# ==============================================================================
-# VARIÁVEIS DE CONFIGURAÇÃO
-# ==============================================================================
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -std=c99
+INCLUDES = -Isrc/includes
 LIBS = -lm
-
-# Caminhos corrigidos
-INCLUDES = -I./src/includes
-SRCDIR = src/output
-OBJDIR = obj
 EXEC = main2.exe
 
-# Lista específica de arquivos 
-SRCS = main2.c estatistica.c historico.c fatorial.c matriz.c menus.c estrutura.c
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+# Lista APENAS dos arquivos que EXISTEM
+SRCS = src/main2.c src/estatistica.c src/historico.c src/fatorial.c src/matriz.c src/menus.c
+OBJS = $(SRCS:.c=.o)
 
-# ==============================================================================
-# ALVOS PRINCIPAIS
-# ==============================================================================
-
-all: $(OBJDIR) $(EXEC)
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+all: $(EXEC)
 
 $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBS)
 
-# REGRA CORRIGIDA - caminho completo para os arquivos .c
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-.PHONY: all clean run valgrind
-
 clean:
-	rm -rf $(OBJDIR) $(EXEC)
-	@echo "Limpeza concluída!"
+	rm -f $(OBJS) $(EXEC)
 
 run: $(EXEC)
-	@echo "Executando $(EXEC):"
 	./$(EXEC)
 
 valgrind: $(EXEC)
-	@echo "Executando sob Valgrind:"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(EXEC)
+
+.PHONY: all clean run valgrind

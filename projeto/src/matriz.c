@@ -44,7 +44,6 @@ double *alocarmatriz(dimensao tamanho){
 /*alocação de memoria da matriz resultado multiplicação matricial,
 já que podem envolver uma linha e coluna diferentes*/
 double *alocarmatrizmult(dimensao tamanho1, dimensao tamanho2){
-    int i, j;
     double *matriz = (double*)malloc(tamanho1.linha*tamanho2.coluna*sizeof(double));
 
     if(matriz == NULL){
