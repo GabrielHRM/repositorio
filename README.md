@@ -12,7 +12,7 @@
 
 ## 🚀 Projeto: Conversor de Unidades Brazuca e Calculadora Científica
 **Descrição - UNIDADE 1**: Um conversor de unidades de medidas
-**Descrição - UNIDADE 1**: Uma calculadora de operações matemáticas diversas
+**Descrição - UNIDADE 2**: Uma calculadora de operações matemáticas diversas
 **Repositório**: [(https://github.com/GabrielHRM/repositorio.git)]
 **Vídeo de Demonstração - Unidade 1**: https://youtu.be/kg22OH_BofI
 **Vídeo de Demonstração - Unidade 2**: https://youtu.be/xcLlB28xa_s
